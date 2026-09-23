@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>De Giorgi–Nash–Moser theory in Lean: blueprint</title>
+<link rel="next" href="sec-intro.html" title="Introduction" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-intro.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html"><span class="toc_ref">2</span> <span class="toc_entry">Sobolev Spaces and Weak Derivatives</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-sobolev.html#a0000000002"><span class="toc_ref">2.1</span> <span class="toc_entry">Weak partial derivatives and weak gradients</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000003"><span class="toc_ref">2.2</span> <span class="toc_entry">Sobolev membership and weak-gradient witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000004"><span class="toc_ref">2.3</span> <span class="toc_entry">Cutoffs and zero-extension</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000005"><span class="toc_ref">2.4</span> <span class="toc_entry">Convolution smoothing</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000006"><span class="toc_ref">2.5</span> <span class="toc_entry">Uniqueness of the weak gradient and global smooth approximation</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000007"><span class="toc_ref">2.6</span> <span class="toc_entry">Whole-space Sobolev inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000008"><span class="toc_ref">2.7</span> <span class="toc_entry">Positive-part prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-functional.html"><span class="toc_ref">3</span> <span class="toc_entry">Functional Inequalities</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-functional.html#a0000000009"><span class="toc_ref">3.1</span> <span class="toc_entry">Poincaré inequality on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000010"><span class="toc_ref">3.2</span> <span class="toc_entry">Sobolev–Poincaré on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000011"><span class="toc_ref">3.3</span> <span class="toc_entry">Stampacchia truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000012"><span class="toc_ref">3.4</span> <span class="toc_entry">BMO and the John–Nirenberg geometry</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000013"><span class="toc_ref">3.5</span> <span class="toc_entry">Simple iteration lemma</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000014"><span class="toc_ref">3.6</span> <span class="toc_entry">Local John–Nirenberg theorem</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000015"><span class="toc_ref">3.7</span> <span class="toc_entry">Campanato characterisation of Hölder spaces</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html"><span class="toc_ref">4</span> <span class="toc_entry">Ball Extension, Approximation, and Supporting Tools</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-extension.html#a0000000016"><span class="toc_ref">4.1</span> <span class="toc_entry">Sobolev chain rule</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000017"><span class="toc_ref">4.2</span> <span class="toc_entry">Smooth approximation on the unit ball</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Rescaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">Inward and outward dilation</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">One-shot smooth approximation</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000021"><span class="toc_ref">4.3</span> <span class="toc_entry">The unit-ball extension operator</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">Definitions and elementary algebra</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">Geometry of inversion</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">Smooth-input extension estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">Smooth approximation of the extension on a rough input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">Smooth blends and approximation control</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The smoothing theorem on a smooth input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The main extension theorems</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000029"><span class="toc_ref">4.4</span> <span class="toc_entry">Positive-part machinery</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000030"><span class="toc_ref">4.5</span> <span class="toc_entry">\(L^p\) function toolkit</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000031"><span class="toc_ref">4.6</span> <span class="toc_entry">Finite covering</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000032"><span class="toc_ref">4.7</span> <span class="toc_entry">Foundations and shared prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-weakform.html"><span class="toc_ref">5</span> <span class="toc_entry">Elliptic Coefficients and Weak Formulation</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-weakform.html#a0000000033"><span class="toc_ref">5.1</span> <span class="toc_entry">Elliptic coefficient structure</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000034"><span class="toc_ref">5.2</span> <span class="toc_entry">Pointwise bilinear form on Sobolev witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000035"><span class="toc_ref">5.3</span> <span class="toc_entry">Divergence-form right-hand sides</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000036"><span class="toc_ref">5.4</span> <span class="toc_entry">Smooth test functions and the L\(^2\) coefficient operator</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000037"><span class="toc_ref">5.5</span> <span class="toc_entry">The L\(^2\) coefficient operator and the closed bilinear form</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000038"><span class="toc_ref">5.6</span> <span class="toc_entry">Weak problems and weak solutions</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000039"><span class="toc_ref">5.7</span> <span class="toc_entry">Existence via Lax–Milgram</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000040"><span class="toc_ref">5.8</span> <span class="toc_entry">Weighted bilinear-form estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000041"><span class="toc_ref">5.9</span> <span class="toc_entry">Ball scaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000042"><span class="toc_ref">5.10</span> <span class="toc_entry">Localization helpers</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html"><span class="toc_ref">6</span> <span class="toc_entry">De Giorgi Iteration and Local Boundedness</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-degiorgi.html#a0000000043"><span class="toc_ref">6.1</span> <span class="toc_entry">Positive-part truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000044"><span class="toc_ref">6.2</span> <span class="toc_entry">Cutoff admissibility</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000045"><span class="toc_ref">6.3</span> <span class="toc_entry">Weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000046"><span class="toc_ref">6.4</span> <span class="toc_entry">Chebyshev bound on superlevel sets</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000047"><span class="toc_ref">6.5</span> <span class="toc_entry">Pre-iteration estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000048"><span class="toc_ref">6.6</span> <span class="toc_entry">De Giorgi iteration sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000049"><span class="toc_ref">6.7</span> <span class="toc_entry">Recurrence and abstract closeout</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000050"><span class="toc_ref">6.8</span> <span class="toc_entry">The De Giorgi \(L^\infty \) bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000051"><span class="toc_ref">6.9</span> <span class="toc_entry">Normalised constants</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html"><span class="toc_ref">7</span> <span class="toc_entry">Moser Iteration and Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-moser.html#a0000000052"><span class="toc_ref">7.1</span> <span class="toc_entry">Moser Iteration</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000053"><span class="toc_ref">7.1.1</span> <span class="toc_entry">Moser constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000054"><span class="toc_ref">7.1.2</span> <span class="toc_entry">Geometric sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000055"><span class="toc_ref">7.1.3</span> <span class="toc_entry">Regularized power cutoffs</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000056"><span class="toc_ref">7.1.4</span> <span class="toc_entry">Sobolev preparation and the energy bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000057"><span class="toc_ref">7.1.5</span> <span class="toc_entry">One-step Moser pre-estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000058"><span class="toc_ref">7.1.6</span> <span class="toc_entry">Iteration</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000059"><span class="toc_ref">7.1.7</span> <span class="toc_entry">Closeout to \(L^\infty \)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000060"><span class="toc_ref">7.2</span> <span class="toc_entry">Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000061"><span class="toc_ref">7.2.1</span> <span class="toc_entry">The weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000062"><span class="toc_ref">7.2.2</span> <span class="toc_entry">Reverse Holder inequalities (one–step)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000063"><span class="toc_ref">7.2.3</span> <span class="toc_entry">Stage one (inverse iteration)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000064"><span class="toc_ref">7.2.4</span> <span class="toc_entry">Stage two (forward low-power iteration)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html"><span class="toc_ref">8</span> <span class="toc_entry">Crossover, Weak Harnack, Harnack, and Hölder Regularity</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-crossover.html#a0000000065"><span class="toc_ref">8.1</span> <span class="toc_entry">Crossover Estimate</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000066"><span class="toc_ref">8.1.1</span> <span class="toc_entry">Logarithmic gradient bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000067"><span class="toc_ref">8.1.2</span> <span class="toc_entry">BMO control of \(\log u\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000068"><span class="toc_ref">8.1.3</span> <span class="toc_entry">John–Nirenberg exponential integrability</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000069"><span class="toc_ref">8.1.4</span> <span class="toc_entry">Crossover product bound</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000070"><span class="toc_ref">8.2</span> <span class="toc_entry">Weak Harnack Inequality</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000071"><span class="toc_ref">8.2.1</span> <span class="toc_entry">Support constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000072"><span class="toc_ref">8.2.2</span> <span class="toc_entry">Measure-bound utilities</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000073"><span class="toc_ref">8.3</span> <span class="toc_entry">Harnack Inequality and Holder Regularity</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000074"><span class="toc_ref">8.3.1</span> <span class="toc_entry">Holder regularity</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+ <div class="titlepage">
+<h1>De Giorgi–Nash–Moser theory in Lean: blueprint</h1>
+<p class="authors">
+<span class="author">Scott Armstrong and Julia Kempe</span>
+</p>
+</div>
+</div> <!--main-text -->
+<nav class=local_toc>
+<ul>
+  <li>	
+  <a href="sec-intro.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html"><span class="toc_ref">2</span> <span class="toc_entry">Sobolev Spaces and Weak Derivatives</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-sobolev.html#a0000000002"><span class="toc_ref">2.1</span> <span class="toc_entry">Weak partial derivatives and weak gradients</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000003"><span class="toc_ref">2.2</span> <span class="toc_entry">Sobolev membership and weak-gradient witnesses</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000004"><span class="toc_ref">2.3</span> <span class="toc_entry">Cutoffs and zero-extension</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000005"><span class="toc_ref">2.4</span> <span class="toc_entry">Convolution smoothing</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000006"><span class="toc_ref">2.5</span> <span class="toc_entry">Uniqueness of the weak gradient and global smooth approximation</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000007"><span class="toc_ref">2.6</span> <span class="toc_entry">Whole-space Sobolev inequality</span></a>
+  </li>
+  <li>	
+  <a href="sec-sobolev.html#a0000000008"><span class="toc_ref">2.7</span> <span class="toc_entry">Positive-part prelude</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-functional.html"><span class="toc_ref">3</span> <span class="toc_entry">Functional Inequalities</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-functional.html#a0000000009"><span class="toc_ref">3.1</span> <span class="toc_entry">Poincaré inequality on the unit ball</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000010"><span class="toc_ref">3.2</span> <span class="toc_entry">Sobolev–Poincaré on the unit ball</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000011"><span class="toc_ref">3.3</span> <span class="toc_entry">Stampacchia truncation</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000012"><span class="toc_ref">3.4</span> <span class="toc_entry">BMO and the John–Nirenberg geometry</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000013"><span class="toc_ref">3.5</span> <span class="toc_entry">Simple iteration lemma</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000014"><span class="toc_ref">3.6</span> <span class="toc_entry">Local John–Nirenberg theorem</span></a>
+  </li>
+  <li>	
+  <a href="sec-functional.html#a0000000015"><span class="toc_ref">3.7</span> <span class="toc_entry">Campanato characterisation of Hölder spaces</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-extension.html"><span class="toc_ref">4</span> <span class="toc_entry">Ball Extension, Approximation, and Supporting Tools</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-extension.html#a0000000016"><span class="toc_ref">4.1</span> <span class="toc_entry">Sobolev chain rule</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000017"><span class="toc_ref">4.2</span> <span class="toc_entry">Smooth approximation on the unit ball</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-extension.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Rescaling</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">Inward and outward dilation</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">One-shot smooth approximation</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000021"><span class="toc_ref">4.3</span> <span class="toc_entry">The unit-ball extension operator</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-extension.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">Definitions and elementary algebra</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">Geometry of inversion</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">Smooth-input extension estimates</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">Smooth approximation of the extension on a rough input</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">Smooth blends and approximation control</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The smoothing theorem on a smooth input</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The main extension theorems</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000029"><span class="toc_ref">4.4</span> <span class="toc_entry">Positive-part machinery</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000030"><span class="toc_ref">4.5</span> <span class="toc_entry">\(L^p\) function toolkit</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000031"><span class="toc_ref">4.6</span> <span class="toc_entry">Finite covering</span></a>
+  </li>
+  <li>	
+  <a href="sec-extension.html#a0000000032"><span class="toc_ref">4.7</span> <span class="toc_entry">Foundations and shared prelude</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-weakform.html"><span class="toc_ref">5</span> <span class="toc_entry">Elliptic Coefficients and Weak Formulation</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-weakform.html#a0000000033"><span class="toc_ref">5.1</span> <span class="toc_entry">Elliptic coefficient structure</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000034"><span class="toc_ref">5.2</span> <span class="toc_entry">Pointwise bilinear form on Sobolev witnesses</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000035"><span class="toc_ref">5.3</span> <span class="toc_entry">Divergence-form right-hand sides</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000036"><span class="toc_ref">5.4</span> <span class="toc_entry">Smooth test functions and the L\(^2\) coefficient operator</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000037"><span class="toc_ref">5.5</span> <span class="toc_entry">The L\(^2\) coefficient operator and the closed bilinear form</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000038"><span class="toc_ref">5.6</span> <span class="toc_entry">Weak problems and weak solutions</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000039"><span class="toc_ref">5.7</span> <span class="toc_entry">Existence via Lax–Milgram</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000040"><span class="toc_ref">5.8</span> <span class="toc_entry">Weighted bilinear-form estimates</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000041"><span class="toc_ref">5.9</span> <span class="toc_entry">Ball scaling</span></a>
+  </li>
+  <li>	
+  <a href="sec-weakform.html#a0000000042"><span class="toc_ref">5.10</span> <span class="toc_entry">Localization helpers</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html"><span class="toc_ref">6</span> <span class="toc_entry">De Giorgi Iteration and Local Boundedness</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-degiorgi.html#a0000000043"><span class="toc_ref">6.1</span> <span class="toc_entry">Positive-part truncation</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000044"><span class="toc_ref">6.2</span> <span class="toc_entry">Cutoff admissibility</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000045"><span class="toc_ref">6.3</span> <span class="toc_entry">Weighted Caccioppoli inequality</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000046"><span class="toc_ref">6.4</span> <span class="toc_entry">Chebyshev bound on superlevel sets</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000047"><span class="toc_ref">6.5</span> <span class="toc_entry">Pre-iteration estimate</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000048"><span class="toc_ref">6.6</span> <span class="toc_entry">De Giorgi iteration sequences</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000049"><span class="toc_ref">6.7</span> <span class="toc_entry">Recurrence and abstract closeout</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000050"><span class="toc_ref">6.8</span> <span class="toc_entry">The De Giorgi \(L^\infty \) bound</span></a>
+  </li>
+  <li>	
+  <a href="sec-degiorgi.html#a0000000051"><span class="toc_ref">6.9</span> <span class="toc_entry">Normalised constants</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-moser.html"><span class="toc_ref">7</span> <span class="toc_entry">Moser Iteration and Supersolution Estimates</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-moser.html#a0000000052"><span class="toc_ref">7.1</span> <span class="toc_entry">Moser Iteration</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-moser.html#a0000000053"><span class="toc_ref">7.1.1</span> <span class="toc_entry">Moser constants</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000054"><span class="toc_ref">7.1.2</span> <span class="toc_entry">Geometric sequences</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000055"><span class="toc_ref">7.1.3</span> <span class="toc_entry">Regularized power cutoffs</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000056"><span class="toc_ref">7.1.4</span> <span class="toc_entry">Sobolev preparation and the energy bound</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000057"><span class="toc_ref">7.1.5</span> <span class="toc_entry">One-step Moser pre-estimate</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000058"><span class="toc_ref">7.1.6</span> <span class="toc_entry">Iteration</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000059"><span class="toc_ref">7.1.7</span> <span class="toc_entry">Closeout to \(L^\infty \)</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000060"><span class="toc_ref">7.2</span> <span class="toc_entry">Supersolution Estimates</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-moser.html#a0000000061"><span class="toc_ref">7.2.1</span> <span class="toc_entry">The weighted Caccioppoli inequality</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000062"><span class="toc_ref">7.2.2</span> <span class="toc_entry">Reverse Holder inequalities (one–step)</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000063"><span class="toc_ref">7.2.3</span> <span class="toc_entry">Stage one (inverse iteration)</span></a>
+  </li>
+  <li>	
+  <a href="sec-moser.html#a0000000064"><span class="toc_ref">7.2.4</span> <span class="toc_entry">Stage two (forward low-power iteration)</span></a>
+  </li>
+
+	</ul>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-crossover.html"><span class="toc_ref">8</span> <span class="toc_entry">Crossover, Weak Harnack, Harnack, and Hölder Regularity</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-crossover.html#a0000000065"><span class="toc_ref">8.1</span> <span class="toc_entry">Crossover Estimate</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-crossover.html#a0000000066"><span class="toc_ref">8.1.1</span> <span class="toc_entry">Logarithmic gradient bound</span></a>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000067"><span class="toc_ref">8.1.2</span> <span class="toc_entry">BMO control of \(\log u\)</span></a>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000068"><span class="toc_ref">8.1.3</span> <span class="toc_entry">John–Nirenberg exponential integrability</span></a>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000069"><span class="toc_ref">8.1.4</span> <span class="toc_entry">Crossover product bound</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000070"><span class="toc_ref">8.2</span> <span class="toc_entry">Weak Harnack Inequality</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-crossover.html#a0000000071"><span class="toc_ref">8.2.1</span> <span class="toc_entry">Support constants</span></a>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000072"><span class="toc_ref">8.2.2</span> <span class="toc_entry">Measure-bound utilities</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sec-crossover.html#a0000000073"><span class="toc_ref">8.3</span> <span class="toc_entry">Harnack Inequality and Holder Regularity</span></a>
+	<ul>
+		   <li>	
+  <a href="sec-crossover.html#a0000000074"><span class="toc_ref">8.3.1</span> <span class="toc_entry">Holder regularity</span></a>
+  </li>
+
+	</ul>
+  </li>
+
+	</ul>
+  </li>
+</ul>
+</nav>
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="sec-intro.html" title="Introduction"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>

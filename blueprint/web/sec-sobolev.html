@@ -1,0 +1,3398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Sobolev Spaces and Weak Derivatives</title>
+<link rel="next" href="sec-functional.html" title="Functional Inequalities" />
+<link rel="prev" href="sec-intro.html" title="Introduction" />
+<link rel="up" href="index.html" title="De Giorgi–Nash–Moser theory in Lean: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">De Giorgi–Nash–Moser theory in Lean: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-intro.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class=" active current">
+  <a href="sec-sobolev.html"><span class="toc_ref">2</span> <span class="toc_entry">Sobolev Spaces and Weak Derivatives</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sec-sobolev.html#a0000000002"><span class="toc_ref">2.1</span> <span class="toc_entry">Weak partial derivatives and weak gradients</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000003"><span class="toc_ref">2.2</span> <span class="toc_entry">Sobolev membership and weak-gradient witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000004"><span class="toc_ref">2.3</span> <span class="toc_entry">Cutoffs and zero-extension</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000005"><span class="toc_ref">2.4</span> <span class="toc_entry">Convolution smoothing</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000006"><span class="toc_ref">2.5</span> <span class="toc_entry">Uniqueness of the weak gradient and global smooth approximation</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000007"><span class="toc_ref">2.6</span> <span class="toc_entry">Whole-space Sobolev inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000008"><span class="toc_ref">2.7</span> <span class="toc_entry">Positive-part prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-functional.html"><span class="toc_ref">3</span> <span class="toc_entry">Functional Inequalities</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-functional.html#a0000000009"><span class="toc_ref">3.1</span> <span class="toc_entry">Poincaré inequality on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000010"><span class="toc_ref">3.2</span> <span class="toc_entry">Sobolev–Poincaré on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000011"><span class="toc_ref">3.3</span> <span class="toc_entry">Stampacchia truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000012"><span class="toc_ref">3.4</span> <span class="toc_entry">BMO and the John–Nirenberg geometry</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000013"><span class="toc_ref">3.5</span> <span class="toc_entry">Simple iteration lemma</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000014"><span class="toc_ref">3.6</span> <span class="toc_entry">Local John–Nirenberg theorem</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000015"><span class="toc_ref">3.7</span> <span class="toc_entry">Campanato characterisation of Hölder spaces</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html"><span class="toc_ref">4</span> <span class="toc_entry">Ball Extension, Approximation, and Supporting Tools</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-extension.html#a0000000016"><span class="toc_ref">4.1</span> <span class="toc_entry">Sobolev chain rule</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000017"><span class="toc_ref">4.2</span> <span class="toc_entry">Smooth approximation on the unit ball</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Rescaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">Inward and outward dilation</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">One-shot smooth approximation</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000021"><span class="toc_ref">4.3</span> <span class="toc_entry">The unit-ball extension operator</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">Definitions and elementary algebra</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">Geometry of inversion</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">Smooth-input extension estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">Smooth approximation of the extension on a rough input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">Smooth blends and approximation control</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The smoothing theorem on a smooth input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The main extension theorems</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000029"><span class="toc_ref">4.4</span> <span class="toc_entry">Positive-part machinery</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000030"><span class="toc_ref">4.5</span> <span class="toc_entry">\(L^p\) function toolkit</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000031"><span class="toc_ref">4.6</span> <span class="toc_entry">Finite covering</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000032"><span class="toc_ref">4.7</span> <span class="toc_entry">Foundations and shared prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-weakform.html"><span class="toc_ref">5</span> <span class="toc_entry">Elliptic Coefficients and Weak Formulation</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-weakform.html#a0000000033"><span class="toc_ref">5.1</span> <span class="toc_entry">Elliptic coefficient structure</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000034"><span class="toc_ref">5.2</span> <span class="toc_entry">Pointwise bilinear form on Sobolev witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000035"><span class="toc_ref">5.3</span> <span class="toc_entry">Divergence-form right-hand sides</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000036"><span class="toc_ref">5.4</span> <span class="toc_entry">Smooth test functions and the L\(^2\) coefficient operator</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000037"><span class="toc_ref">5.5</span> <span class="toc_entry">The L\(^2\) coefficient operator and the closed bilinear form</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000038"><span class="toc_ref">5.6</span> <span class="toc_entry">Weak problems and weak solutions</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000039"><span class="toc_ref">5.7</span> <span class="toc_entry">Existence via Lax–Milgram</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000040"><span class="toc_ref">5.8</span> <span class="toc_entry">Weighted bilinear-form estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000041"><span class="toc_ref">5.9</span> <span class="toc_entry">Ball scaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000042"><span class="toc_ref">5.10</span> <span class="toc_entry">Localization helpers</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html"><span class="toc_ref">6</span> <span class="toc_entry">De Giorgi Iteration and Local Boundedness</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-degiorgi.html#a0000000043"><span class="toc_ref">6.1</span> <span class="toc_entry">Positive-part truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000044"><span class="toc_ref">6.2</span> <span class="toc_entry">Cutoff admissibility</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000045"><span class="toc_ref">6.3</span> <span class="toc_entry">Weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000046"><span class="toc_ref">6.4</span> <span class="toc_entry">Chebyshev bound on superlevel sets</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000047"><span class="toc_ref">6.5</span> <span class="toc_entry">Pre-iteration estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000048"><span class="toc_ref">6.6</span> <span class="toc_entry">De Giorgi iteration sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000049"><span class="toc_ref">6.7</span> <span class="toc_entry">Recurrence and abstract closeout</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000050"><span class="toc_ref">6.8</span> <span class="toc_entry">The De Giorgi \(L^\infty \) bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000051"><span class="toc_ref">6.9</span> <span class="toc_entry">Normalised constants</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html"><span class="toc_ref">7</span> <span class="toc_entry">Moser Iteration and Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-moser.html#a0000000052"><span class="toc_ref">7.1</span> <span class="toc_entry">Moser Iteration</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000053"><span class="toc_ref">7.1.1</span> <span class="toc_entry">Moser constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000054"><span class="toc_ref">7.1.2</span> <span class="toc_entry">Geometric sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000055"><span class="toc_ref">7.1.3</span> <span class="toc_entry">Regularized power cutoffs</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000056"><span class="toc_ref">7.1.4</span> <span class="toc_entry">Sobolev preparation and the energy bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000057"><span class="toc_ref">7.1.5</span> <span class="toc_entry">One-step Moser pre-estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000058"><span class="toc_ref">7.1.6</span> <span class="toc_entry">Iteration</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000059"><span class="toc_ref">7.1.7</span> <span class="toc_entry">Closeout to \(L^\infty \)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000060"><span class="toc_ref">7.2</span> <span class="toc_entry">Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000061"><span class="toc_ref">7.2.1</span> <span class="toc_entry">The weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000062"><span class="toc_ref">7.2.2</span> <span class="toc_entry">Reverse Holder inequalities (one–step)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000063"><span class="toc_ref">7.2.3</span> <span class="toc_entry">Stage one (inverse iteration)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000064"><span class="toc_ref">7.2.4</span> <span class="toc_entry">Stage two (forward low-power iteration)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html"><span class="toc_ref">8</span> <span class="toc_entry">Crossover, Weak Harnack, Harnack, and Hölder Regularity</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-crossover.html#a0000000065"><span class="toc_ref">8.1</span> <span class="toc_entry">Crossover Estimate</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000066"><span class="toc_ref">8.1.1</span> <span class="toc_entry">Logarithmic gradient bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000067"><span class="toc_ref">8.1.2</span> <span class="toc_entry">BMO control of \(\log u\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000068"><span class="toc_ref">8.1.3</span> <span class="toc_entry">John–Nirenberg exponential integrability</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000069"><span class="toc_ref">8.1.4</span> <span class="toc_entry">Crossover product bound</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000070"><span class="toc_ref">8.2</span> <span class="toc_entry">Weak Harnack Inequality</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000071"><span class="toc_ref">8.2.1</span> <span class="toc_entry">Support constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000072"><span class="toc_ref">8.2.2</span> <span class="toc_entry">Measure-bound utilities</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000073"><span class="toc_ref">8.3</span> <span class="toc_entry">Harnack Inequality and Holder Regularity</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000074"><span class="toc_ref">8.3.1</span> <span class="toc_entry">Holder regularity</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="sec:sobolev">2 Sobolev Spaces and Weak Derivatives</h1>
+
+<p>Throughout this section we fix a positive integer \(d\) and write \(E = \mathbb {R}^d\) (in the Lean formalization, \(E\) is the Euclidean space of dimension \(d\), with the canonical orthonormal basis \((e_i)_{i=1}^d\)). All open sets \(\Omega \subseteq E\) are equipped with Lebesgue measure. For a smooth scalar test function \(\varphi \in C_c^\infty (E)\), \(i \in \{ 1,\ldots ,d\} \) and \(x \in E\) we abbreviate the \(i\)-th partial derivative by \(\partial _i \varphi (x) = (D\varphi (x))(e_i)\). </p>
+<h1 id="a0000000002">2.1 Weak partial derivatives and weak gradients</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:HasWeakPartialDeriv">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.1</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:HasWeakPartialDeriv">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv" class="lean_decl">DeGiorgi.HasWeakPartialDeriv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>  Let \(\Omega \subseteq E\) be a set, \(i \in \{ 1,\ldots ,d\} \), and \(f, g : E \to \mathbb {R}\). We say that \(g\) is the <em>weak \(i\)-th partial derivative of \(f\) on \(\Omega \)</em>, written \(\partial _i^w f = g\) on \(\Omega \), if for every test function \(\varphi \in C^\infty (E,\mathbb {R})\) with compact support and \(\operatorname{supp}\varphi \subseteq \Omega \) we have </p>
+<div class="displaymath" id="a0000000075">
+  \begin{equation*}  \int _\Omega f(x) \,  \partial _i \varphi (x) \,  dx = - \int _\Omega g(x) \,  \varphi (x) \,  dx. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:HasWeakGrad">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:HasWeakGrad">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakGrad" class="lean_decl">DeGiorgi.HasWeakGrad</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakDiv" class="lean_decl">DeGiorgi.HasWeakDiv</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   A vector field \(G : E \to E\) is a <em>weak gradient</em> of \(f\) on \(\Omega \), written \(\nabla ^w f = G\), if each component \(G_i\) is the weak \(i\)-th partial derivative of \(f\) on \(\Omega \). </p>
+<p>A scalar function \(g : E \to \mathbb {R}\) is a <em>weak divergence</em> of a vector field \(F : E \to E\) on \(\Omega \) if for every \(\varphi \in C_c^\infty \) with \(\operatorname{supp}\varphi \subseteq \Omega \) </p>
+<div class="displaymath" id="a0000000076">
+  \begin{equation*}  \int _\Omega \sum _{i=1}^d F_i(x) \,  \partial _i \varphi (x) \,  dx = - \int _\Omega g(x)\,  \varphi (x)\,  dx. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_partial_unique">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.3</span>
+    <span class="lemma_thmtitle">Uniqueness</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_partial_unique">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000077"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv.ae_eq" class="lean_decl">DeGiorgi.HasWeakPartialDeriv.ae_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open, \(i \in \{ 1,\ldots ,d\} \) and \(f, g_1, g_2 : E \to \mathbb {R}\) with \(g_1\) and \(g_2\) locally integrable on \(\Omega \). If both \(g_1\) and \(g_2\) are weak \(i\)-th partial derivatives of \(f\) on \(\Omega \), then \(g_1 = g_2\) almost everywhere on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000077">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>It suffices to show that \(g_1 - g_2 = 0\) a.e. on \(\Omega \). The function \(g_1 - g_2\) is locally integrable on \(\Omega \), and for any \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega \) we have, subtracting the two test identities, </p>
+<div class="displaymath" id="a0000000078">
+  \begin{equation*}  \int _\Omega g_1(x)\, \varphi (x)\, dx = \int _\Omega g_2(x)\, \varphi (x)\, dx, \end{equation*}
+</div>
+<p> so \(\int _\Omega (g_1 - g_2)(x)\, \varphi (x)\, dx = 0\). Since \(\varphi \) vanishes outside its support which lies in \(\Omega \), this is the same as integrating over the whole space \(E\). By the standard fact that a locally integrable function whose integral against every smooth compactly supported test function vanishes is zero almost everywhere (<span class="ttfamily">IsOpen.ae_eq_zero_of_integral_contDiff_smul_eq_zero</span>), we conclude \(g_1 = g_2\) a.e. on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_of_contDiff">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.4</span>
+    <span class="lemma_thmtitle">Classical \(\Rightarrow \) weak derivative</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_of_contDiff">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000079"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv.of_contDiff" class="lean_decl">DeGiorgi.HasWeakPartialDeriv.of_contDiff</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open and \(f \in C^1(E,\mathbb {R})\). Then \(\partial _i f\) is the weak \(i\)-th partial derivative of \(f\) on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000079">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Take any \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega \). Both \(f \cdot \partial _i \varphi \) and \(\partial _i f \cdot \varphi \) vanish outside \(\operatorname{supp}\varphi \subseteq \Omega \), so the corresponding integrals on \(\Omega \) and on \(E\) coincide. The classical integration-by-parts formula (<span class="ttfamily">integral_mul_fderiv_eq_neg_fderiv_mul_of_integrable</span>) for differentiable functions with compactly supported product gives </p>
+<div class="displaymath" id="a0000000080">
+  \begin{equation*}  \int _E f(x)\, \partial _i \varphi (x)\, dx = - \int _E (\partial _i f)(x)\, \varphi (x)\, dx, \end{equation*}
+</div>
+<p> which is the weak-derivative identity on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_product_rule">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.5</span>
+    <span class="lemma_thmtitle">Product rule against a smooth factor</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_product_rule">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000081"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv.mul_smooth" class="lean_decl">DeGiorgi.HasWeakPartialDeriv.mul_smooth</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open, \(i \in \{ 1,\ldots ,d\} \), and let \(f, g, \eta : E \to \mathbb {R}\) with \(\eta \in C^\infty \), \(f\) and \(g\) locally integrable on \(\Omega \), and \(g\) a weak \(i\)-th partial derivative of \(f\) on \(\Omega \). Then </p>
+<div class="displaymath" id="a0000000082">
+  \begin{equation*}  x \mapsto \eta (x)\, g(x) + (\partial _i \eta (x))\, f(x) \end{equation*}
+</div>
+<p> is the weak \(i\)-th partial derivative of \(\eta f\) on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000081">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Fix a test function \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega \). Then \(\eta \varphi \) is also smooth, compactly supported, with support contained in \(\Omega \). Applying the weak-derivative identity for \(f\) to the test function \(\eta \varphi \) and using the smooth product rule \(\partial _i(\eta \varphi ) = \eta \, \partial _i\varphi + \varphi \, \partial _i\eta \) gives </p>
+<div class="displaymath" id="a0000000083">
+  \begin{equation*}  \int _\Omega f(x)\bigl(\eta (x)\, \partial _i\varphi (x) + \varphi (x)\, \partial _i\eta (x)\bigr)\, dx = -\int _\Omega g(x)\, \eta (x)\, \varphi (x)\, dx. \end{equation*}
+</div>
+<p> The local integrability of \(f\) and \(g\), together with continuity of \(\eta \), \(\partial _i\eta \), \(\varphi \), \(\partial _i\varphi \) and compactness of supports, ensures that all integrals are absolutely convergent and may be split. Splitting the left-hand side and rearranging yields </p>
+<div class="displaymath" id="a0000000084">
+  \begin{align*}  \int _\Omega \eta (x)\, f(x)\, \partial _i\varphi (x)\, dx & = -\int _\Omega g(x)\, \eta (x)\, \varphi (x)\, dx - \int _\Omega f(x)\, \varphi (x)\, \partial _i\eta (x)\, dx \\ & = -\int _\Omega \bigl(\eta (x)g(x) + (\partial _i\eta (x))f(x)\bigr)\, \varphi (x)\, dx, \end{align*}
+</div>
+<p> which is the desired weak-derivative identity for \(\eta f\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_restrict">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.6</span>
+    <span class="lemma_thmtitle">Restriction to a sub-open set</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_restrict">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000085"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv.restrict" class="lean_decl">DeGiorgi.HasWeakPartialDeriv.restrict</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega ' \subseteq \Omega \subseteq E\) with \(\Omega '\) open. If \(g\) is the weak \(i\)-th partial derivative of \(f\) on \(\Omega \), then it is also the weak \(i\)-th partial derivative of \(f\) on \(\Omega '\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000085">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Let \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega '\). Then a fortiori \(\operatorname{supp}\varphi \subseteq \Omega \), so applying the hypothesis on \(\Omega \) gives the integral identity over \(\Omega \). Outside \(\Omega '\) the test function \(\varphi \) and the field \(\partial _i\varphi \) both vanish (the latter because \(\varphi \) is locally constant equal to zero), so the integrals over \(\Omega \) and \(\Omega '\) of \(f\, \partial _i\varphi \) and \(g\, \varphi \) agree. The result follows. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_lp_closure">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.7</span>
+    <span class="lemma_thmtitle">\(L^p\)-closure of weak partial derivatives</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_lp_closure">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000086"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.HasWeakPartialDeriv.of_eLpNormApprox_p" class="lean_decl">DeGiorgi.HasWeakPartialDeriv.of_eLpNormApprox_p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open and \(1 {\lt} p {\lt} \infty \). Suppose \(f, g \in L^{p}(\Omega )\) and there are sequences \((\psi _n)\) and \((g_{\psi _n})\) such that: </p>
+<ul class="itemize">
+  <li><p>\(g_{\psi _n}\) is the weak \(i\)-th partial derivative of \(\psi _n\) on \(\Omega \) for every \(n\); </p>
+</li>
+  <li><p>\(\psi _n - f\) and \(g_{\psi _n} - g\) lie in \(L^{p}(\Omega )\) and tend to \(0\) in \(L^{p}(\Omega )\) as \(n \to \infty \). </p>
+</li>
+</ul>
+<p> Then \(g\) is the weak \(i\)-th partial derivative of \(f\) on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000086">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Fix \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega \). Let \(q\) denote the Hölder conjugate of \(p\), so that \(1 {\lt} q {\lt} \infty \) and \(1/p + 1/q = 1\). Both \(\varphi \) and \(\partial _i\varphi \) are continuous, compactly supported, and hence belong to \(L^{q}(\Omega )\). </p>
+<p>By Hölder’s inequality on \((\Omega , dx)\), </p>
+<div class="displaymath" id="a0000000087">
+  \begin{align*}  \left| \int _\Omega \partial _i\varphi (x) (\psi _n(x) - f(x))\, dx \right| & \le \| \partial _i\varphi \| _{L^{q}(\Omega )}\, \| \psi _n - f\| _{L^{p}(\Omega )},\\ \left| \int _\Omega \varphi (x) (g_{\psi _n}(x) - g(x))\, dx \right| & \le \| \varphi \| _{L^{q}(\Omega )}\, \| g_{\psi _n} - g\| _{L^{p}(\Omega )}, \end{align*}
+</div>
+<p> both of which tend to zero by hypothesis. Hence </p>
+<div class="displaymath" id="a0000000088">
+  \begin{align*}  \int _\Omega \psi _n(x)\, \partial _i\varphi (x)\, dx & \; \to \;  \int _\Omega f(x)\, \partial _i\varphi (x)\, dx, \\ \int _\Omega g_{\psi _n}(x)\, \varphi (x)\, dx & \; \to \;  \int _\Omega g(x)\, \varphi (x)\, dx. \end{align*}
+</div>
+<p> By assumption, for every \(n\) </p>
+<div class="displaymath" id="a0000000089">
+  \begin{equation*}  \int _\Omega \psi _n(x)\, \partial _i\varphi (x)\, dx = -\int _\Omega g_{\psi _n}(x)\, \varphi (x)\, dx, \end{equation*}
+</div>
+<p> and passing to the limit yields </p>
+<div class="displaymath" id="a0000000090">
+  \begin{equation*}  \int _\Omega f(x)\, \partial _i\varphi (x)\, dx = -\int _\Omega g(x)\, \varphi (x)\, dx, \end{equation*}
+</div>
+<p> which is the weak-derivative identity for \(f\) and \(g\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000003">2.2 Sobolev membership and weak-gradient witnesses</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:MemW1p">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:MemW1p">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1p" class="lean_decl">DeGiorgi.MemW1p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   Let \(p \in [1,\infty ]\), \(\Omega \subseteq E\) a set, and \(f : E \to \mathbb {R}\). We say that \(f \in W^{1,p}(\Omega )\) if \(f \in L^{p}(\Omega )\) and for every \(i \in \{ 1,\ldots ,d\} \) there exists \(g_i \in L^{p}(\Omega )\) such that \(g_i\) is the weak \(i\)-th partial derivative of \(f\) on \(\Omega \). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:MemW1pWitness">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.9</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:MemW1pWitness">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakGrad">Definition 2.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness" class="lean_decl">DeGiorgi.MemW1pWitness</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   A <em>\(W^{1,p}\)-witness</em> for \(f\) on \(\Omega \) is a tuple consisting of a proof that \(f \in L^{p}(\Omega )\), a vector field \(G : E \to E\) (the weak gradient field) such that each component \(x \mapsto G_i(x)\) lies in \(L^{p}(\Omega )\), together with a proof that \(G\) is a weak gradient of \(f\) on \(\Omega \) (Definition&#160;<a href="sec-sobolev.html#def:HasWeakGrad">2.2</a>). </p>
+
+  </div>
+</div>
+<p>The Hilbert-space case \(p = 2\) is also denoted \(H^1(\Omega ) := W^{1,2}(\Omega )\) in the formalization (<span class="ttfamily">DeGiorgi.MemH1</span>). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:MemW01p">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.10</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:MemW01p">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW01p" class="lean_decl">DeGiorgi.MemW01p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   We say that \(f \in W_0^{1,p}(\Omega )\) if \(f \in W^{1,p}(\Omega )\) and there exist a \(W^{1,p}\)-witness \((G)\) for \(f\) on \(\Omega \) and a sequence \((\varphi _n)_{n\in \mathbb {N}}\) of smooth compactly supported functions with \(\operatorname{supp}\varphi _n \subseteq \Omega \) such that </p>
+<div class="displaymath" id="a0000000091">
+  \begin{equation*}  \| \varphi _n - f\| _{L^{p}(\Omega )} \to 0 \quad \text{and}\quad \| \partial _i \varphi _n - G_i\| _{L^{p}(\Omega )} \to 0 \; \text{ for every } i. \end{equation*}
+</div>
+<p> We write \(H_0^1(\Omega ) := W_0^{1,2}(\Omega )\) (<span class="ttfamily">DeGiorgi.MemH01</span>). </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000092">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">2.11</span>
+    <span class="remark_thmtitle">Existence of an explicit witness; <span class="ttfamily">DeGiorgi.MemW1p.someWitness</span></span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#a0000000092">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Given \(f \in W^{1,p}(\Omega )\), axiom of choice produces a witness as in Definition&#160;<a href="sec-sobolev.html#def:MemW1pWitness">2.9</a>: choose for each coordinate \(i\) a function \(g_i\) as in Definition&#160;<a href="sec-sobolev.html#def:MemW1p">2.8</a>, and assemble them into the vector field \(G(x) := (g_1(x),\ldots ,g_d(x))\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:forgetting-witness">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.12</span>
+    <span class="lemma_thmtitle">Forgetting the witness</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:forgetting-witness">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000093"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.memW1p" class="lean_decl">DeGiorgi.MemW1pWitness.memW1p</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW01p.memW1p" class="lean_decl">DeGiorgi.MemW01p.memW1p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    (<span class="ttfamily">DeGiorgi.MemW1pWitness.memW1p</span>, <span class="ttfamily">DeGiorgi.MemW01p.memW1p</span>)<br />Every witness gives rise to membership: a \(W^{1,p}\)-witness yields \(f \in W^{1,p}(\Omega )\), and an element of \(W_0^{1,p}(\Omega )\) is in particular in \(W^{1,p}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000093">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Direct from the definitions: take \(g_i := G_i\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:witness_add">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.13</span>
+    <span class="lemma_thmtitle">Sum of witnesses</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:witness_add">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000094"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.add" class="lean_decl">DeGiorgi.MemW1pWitness.add</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    For \(u, v \in H^1(\Omega )\) with witnesses \(G_u\) and \(G_v\), the function \(u + v\) admits the witness \(G_u + G_v\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000094">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Membership of \(u+v\) in \(L^{2}(\Omega )\) and of \(G_u + G_v\) in \(L^{2}(\Omega )\) in each coordinate follows from \(L^{2}\) being a vector space. To verify the weak-gradient identity, take \(\varphi \in C_c^\infty (E)\) with \(\operatorname{supp}\varphi \subseteq \Omega \). The witnesses \(G_u\) and \(G_v\) give </p>
+<div class="displaymath" id="a0000000095">
+  \begin{align*}  \int _\Omega u(x)\, \partial _i\varphi (x)\, dx & = -\int _\Omega (G_u)_i(x)\, \varphi (x)\, dx, \\ \int _\Omega v(x)\, \partial _i\varphi (x)\, dx & = -\int _\Omega (G_v)_i(x)\, \varphi (x)\, dx. \end{align*}
+</div>
+<p> Adding these identities, using local integrability and the linearity of the integral, yields the weak-gradient identity for \(u + v\) with weak gradient \(G_u + G_v\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:MemW1pWitness_restrict">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.14</span>
+    <span class="lemma_thmtitle">Restriction of witnesses</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:MemW1pWitness_restrict">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000096"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_restrict">Lemma 2.6</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.restrict" class="lean_decl">DeGiorgi.MemW1pWitness.restrict</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(\Omega ' \subseteq \Omega \) with \(\Omega '\) open. Any \(W^{1,p}\)-witness on \(\Omega \) restricts to a \(W^{1,p}\)-witness on \(\Omega '\), with the same gradient field. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000096">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>\(L^{p}\) membership is monotone in the measure (here the volume measure restricted to a smaller set), and Lemma&#160;<a href="sec-sobolev.html#lem:weak_restrict">2.6</a> gives the weak gradient identity on \(\Omega '\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:MemW1pWitness_smul">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.15</span>
+    <span class="lemma_thmtitle">Scalar multiple of a witness</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:MemW1pWitness_smul">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000097"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.smul" class="lean_decl">DeGiorgi.MemW1pWitness.smul</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    For \(u \in H^1(\Omega )\) with witness \(G\) and \(c \in \mathbb {R}\), the function \(cu\) admits the witness \(cG\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000097">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>The \(L^{2}\) memberships are immediate. For the test-function identity, fix \(\varphi \) as before; using linearity and the witness for \(u\), </p>
+<div class="displaymath" id="a0000000098">
+  \begin{equation*}  \int _\Omega (cu)(x)\partial _i\varphi (x)\, dx = c\int _\Omega u(x)\partial _i\varphi (x)\, dx = -c\int _\Omega G_i(x)\varphi (x)\, dx = -\int _\Omega (cG)_i(x)\varphi (x)\, dx. \qedhere \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:witness_mul_smooth_bounded">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">2.16</span>
+    <span class="proposition_thmtitle">Multiplying by a bounded smooth scalar</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#prop:witness_mul_smooth_bounded">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000099"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_product_rule">Lemma 2.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.mul_smooth_bounded_p" class="lean_decl">DeGiorgi.MemW1pWitness.mul_smooth_bounded_p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>    Let \(1 \le p \le \infty \), \(\Omega \) open, \(u\) a function with \(W^{1,p}\)-witness \(G\) on \(\Omega \), and \(\eta \in C^\infty (E)\) satisfying \(|\eta (x)| \le C_0\) and \(\| D\eta (x)\|  \le C_1\) for all \(x\) and constants \(C_0, C_1 \ge 0\). Then \(\eta u\) admits the \(W^{1,p}\)-witness whose gradient field is </p>
+<div class="displaymath" id="a0000000100">
+  \begin{equation*}  x \mapsto \eta (x)\, G(x) + \bigl(\partial _1\eta (x)\, u(x),\ldots ,\partial _d\eta (x)\, u(x)\bigr). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000099">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>The \(L^{p}\) bound on \(\eta u\) follows from the pointwise inequality \(|\eta (x)u(x)| \le C_0 |u(x)|\) and \(u \in L^{p}(\Omega )\). For each component of the displayed gradient field: </p>
+<ul class="itemize">
+  <li><p>\(|\eta (x)G_i(x)| \le C_0 |G_i(x)|\), and \(G_i \in L^{p}(\Omega )\); </p>
+</li>
+  <li><p>\(|\partial _i\eta (x)\, u(x)| \le \| D\eta (x)\| \, |u(x)| \le C_1 |u(x)|\), and \(u \in L^{p}(\Omega )\). </p>
+</li>
+</ul>
+<p> By Minkowski, the sum lies in \(L^{p}(\Omega )\). The weak-gradient identity is the product rule (Lemma&#160;<a href="sec-sobolev.html#lem:weak_product_rule">2.5</a>) applied componentwise to the weak partial derivative \(G_i\) of \(u\) and the smooth factor \(\eta \). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:witness_smooth_cpt">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.17</span>
+    <span class="lemma_thmtitle">Smooth compactly supported functions are \(W^{1,p}\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:witness_smooth_cpt">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000101"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_of_contDiff">Lemma 2.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.of_contDiff_hasCompactSupport" class="lean_decl">DeGiorgi.MemW1pWitness.of_contDiff_hasCompactSupport</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    (<span class="ttfamily">DeGiorgi.MemW1pWitness.of_contDiff_hasCompactSupport</span>)<br />Let \(f \in C^\infty _c(E,\mathbb {R})\). Then \(f\) admits a canonical \(W^{1,p}\)-witness on the whole space \(E\), with weak gradient \(\nabla ^w f = \nabla f\) given by the classical gradient field. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000101">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Smooth compactly supported functions are integrable to any power, so \(f \in L^{p}(E)\) and likewise each classical partial derivative. By Lemma&#160;<a href="sec-sobolev.html#lem:weak_of_contDiff">2.4</a> the classical partial derivatives are weak partial derivatives. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:weak_grad_norm_memLp">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.18</span>
+    <span class="lemma_thmtitle">Norm of weak gradient lies in \(L^{p}\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:weak_grad_norm_memLp">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000102"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.weakGrad_memLp" class="lean_decl">DeGiorgi.MemW1pWitness.weakGrad_memLp</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.weakGrad_norm_memLp" class="lean_decl">DeGiorgi.MemW1pWitness.weakGrad_norm_memLp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(G\) be the weak gradient field of a \(W^{1,p}\)-witness on \(\Omega \). Then \(G \in L^{p}(\Omega ; E)\), and in particular \(\| G(\cdot )\|  \in L^{p}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000102">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Each component \(G_i\) lies in \(L^{p}(\Omega )\) by definition of a witness. For finite-dimensional Euclidean targets the \(L^{p}\) membership of a vector field is equivalent to the \(L^{p}\) membership of each component (<span class="ttfamily">MemLp.of_eval_piLp</span>), so \(G \in L^{p}(\Omega ; E)\). Taking norms preserves \(L^{p}\) membership. </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:H01_vector_space">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">2.19</span>
+    <span class="proposition_thmtitle">\(H_0^1\) is a vector space</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#prop:H01_vector_space">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000103"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:witness_add">Lemma 2.13</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:MemW1pWitness_smul">Lemma 2.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW01p.add" class="lean_decl">DeGiorgi.MemW01p.add</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW01p.smul" class="lean_decl">DeGiorgi.MemW01p.smul</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW01p.sub" class="lean_decl">DeGiorgi.MemW01p.sub</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>    The space \(H_0^1(\Omega )\) is closed under addition, scalar multiplication, and subtraction. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000103">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>For addition: Lemma&#160;<a href="sec-sobolev.html#lem:witness_add">2.13</a> provides a witness for the sum. Approximating sequences add componentwise; by the triangle inequality for \(L^{2}\) on differences, </p>
+<div class="displaymath" id="a0000000104">
+  \begin{equation*}  \| \varphi _n^u + \varphi _n^v - (u+v)\| _{L^{2}(\Omega )} \le \| \varphi _n^u - u\| _{L^{2}(\Omega )} + \| \varphi _n^v - v\| _{L^{2}(\Omega )} \; \to \;  0, \end{equation*}
+</div>
+<p> and similarly for the gradients (using the linearity of the classical derivative on smooth functions). </p>
+<p>For scalar multiplication by \(c\): rescale the approximating sequence by \(c\) and use the homogeneity of the \(L^{2}\) norm, \(\| c\varphi _n - c u\| _{L^{2}} = |c|\, \| \varphi _n - u\| _{L^{2}}\). </p>
+<p>Subtraction follows by writing \(u - v = u + (-1)v\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:memW01p_of_smooth_cpt">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.20</span>
+    <span class="lemma_thmtitle">Smooth compactly supported \(\Rightarrow \) \(W_0^{1,p}\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:memW01p_of_smooth_cpt">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000105"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_of_contDiff">Lemma 2.4</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:witness_smooth_cpt">Lemma 2.17</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.memW01p_of_contDiff_hasCompactSupport" class="lean_decl">DeGiorgi.memW01p_of_contDiff_hasCompactSupport</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.memW01p_of_contDiff_hasCompactSupport_subset" class="lean_decl">DeGiorgi.memW01p_of_contDiff_hasCompactSupport_subset</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    If \(f \in C_c^\infty (E)\) then \(f \in W_0^{1,p}(E)\). More generally, if \(\Omega \subseteq E\) is open and \(f \in C_c^\infty (E)\) with \(\operatorname{supp}f \subseteq \Omega \), then \(f \in W_0^{1,p}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000105">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Take the constant approximating sequence \(\varphi _n := f\). The \(L^{p}\) differences are identically zero, so trivially converge to \(0\), and Lemma&#160;<a href="sec-sobolev.html#lem:witness_smooth_cpt">2.17</a> provides the witness. </p>
+
+  </div>
+</div>
+<h1 id="a0000000004">2.3 Cutoffs and zero-extension</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:smooth_cutoff">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.21</span>
+    <span class="lemma_thmtitle">Smooth cutoff between a compact set and an open neighborhood</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:smooth_cutoff">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000106"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.exists_smooth_cutoff</span>.)</i></p>
+<p>Let \(K \subseteq \Omega \subseteq E\) with \(K\) compact and \(\Omega \) open. Then there exists \(\eta \in C^\infty (E)\) with compact support such that \(0 \le \eta \le 1\), \(\eta = 1\) on \(K\), and \(\operatorname{supp}\eta \subseteq \Omega \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000106">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Since \(K\) is compact and contained in the open set \(\Omega \), there exists \(\delta {\gt} 0\) such that the closed \(\delta \)-thickening of \(K\) is contained in \(\Omega \). The classical existence of a smooth bump (in Lean, <span class="ttfamily">exists_contMDiff_support_eq_eq_one_iff</span>) yields a smooth \(\eta \) with \(\eta (x) = 1\) on \(K\), support equal to the open \(\delta \)-thickening of \(K\), and range in \([0,1]\). Its support is then contained in the closed \(\delta \)-thickening of \(K\) and hence in \(\Omega \), and it is automatically compactly supported. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:zero_outside_tsupport">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.22</span>
+    <span class="lemma_thmtitle">Vanishing outside the support</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:zero_outside_tsupport">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000107"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.zero_outside_of_tsupport_subset" class="lean_decl">DeGiorgi.zero_outside_of_tsupport_subset</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.fderiv_apply_zero_outside_of_tsupport_subset" class="lean_decl">DeGiorgi.fderiv_apply_zero_outside_of_tsupport_subset</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   If \(\operatorname{supp}f \subseteq \Omega \) and \(x \notin \Omega \), then \(f(x) = 0\). If furthermore \(f \in C^\infty \) then \(\partial _i f(x) = 0\) as well. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000107">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>If \(f(x) \ne 0\) then \(x\) lies in the support of \(f\), hence in \(\Omega \), contradicting \(x \notin \Omega \). The same argument applied to \(\partial _i f\) (whose support is contained in that of \(f\)) handles the second statement. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:zero_extend">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.23</span>
+    <span class="theorem_thmtitle">Zero-extension of a \(W_0^{1,p}\) function</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:zero_extend">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000108"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_partial_unique">Lemma 2.3</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_of_contDiff">Lemma 2.4</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_lp_closure">Lemma 2.7</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:zero_outside_tsupport">Lemma 2.22</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.zeroExtend_memW1pWitness_p" class="lean_decl">DeGiorgi.zeroExtend_memW1pWitness_p</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open, \(1 {\lt} p {\lt} \infty \), and \(v \in W_0^{1,p}(\Omega )\) with \(W^{1,p}\)-witness \(G_v\); assume in addition that \(v \in W_0^{1,p}(\Omega )\). Define \(\tilde v := \mathbf{1}_\Omega \cdot v\) on \(E\) and let \(\tilde G\) be the vector field whose components are \(\mathbf{1}_\Omega \cdot (G_v)_i\). Then \(\tilde G\) is a \(W^{1,p}\)-witness for \(\tilde v\) on the whole space \(E\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000108">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>The function \(v\) admits an approximating sequence \((\varphi _n)\) of smooth compactly supported test functions with \(\operatorname{supp}\varphi _n \subseteq \Omega \), and \(\varphi _n \to v\), \(\partial _i\varphi _n \to (G_v)_i\) in \(L^{p}(\Omega )\). By Lemma&#160;<a href="sec-sobolev.html#lem:weak_partial_unique">2.3</a> the gradient field \(G_v\) obtained from the arbitrary witness coincides almost everywhere on \(\Omega \) with the one from the \(W_0^{1,p}\) data. </p>
+<p>The \(L^{p}\) membership of \(\tilde v\) on \(E\) is equivalent to the \(L^{p}\) membership of \(v\) on \(\Omega \), via <span class="ttfamily">MeasureTheory.memLp_indicator_iff_restrict</span>, and similarly for each component of \(\tilde G\). </p>
+<p>To check that \(\tilde G\) is a weak gradient on \(E\), we apply Lemma&#160;<a href="sec-sobolev.html#lem:weak_lp_closure">2.7</a> (closure of weak partial derivatives in \(L^{p}\), on \(\Omega = E\)) with the same approximating sequence \((\varphi _n)\) and the classical gradients \(\partial _i\varphi _n\). The key observations are: </p>
+<ul class="itemize">
+  <li><p>Outside \(\Omega \) both \(\varphi _n\) and \(\partial _i\varphi _n\) vanish (by Lemma&#160;<a href="sec-sobolev.html#lem:zero_outside_tsupport">2.22</a>); hence \(\varphi _n - \tilde v = \mathbf{1}_\Omega (\varphi _n - v)\) and \(\partial _i\varphi _n - \tilde G_i = \mathbf{1}_\Omega (\partial _i\varphi _n - (G_v)_i)\) as functions on \(E\). </p>
+</li>
+  <li><p>The \(L^{p}\)-norm of an indicator of a measurable set equals the \(L^{p}\)-norm computed on the restricted measure (<span class="ttfamily">MeasureTheory.eLpNorm_indicator_eq_eLpNorm_restrict</span>), so the convergence on \(\Omega \) implies convergence on \(E\). </p>
+</li>
+</ul>
+<p> The hypotheses of Lemma&#160;<a href="sec-sobolev.html#lem:weak_lp_closure">2.7</a> are then satisfied, and \(\tilde G_i\) is the weak \(i\)-th partial derivative of \(\tilde v\) on \(E\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000005">2.4 Convolution smoothing</h1>
+<p>For \(n \in \mathbb {N}\), define a \(C^\infty \) bump function on \(E\) centered at \(0\) with inner radius \(r_{\text{in}}^{(n)} := \frac{1}{2(n+1)}\) and outer radius \(r_{\text{out}}^{(n)} := \frac{1}{n+1}\) (<span class="ttfamily">DeGiorgi.shrinkingBump</span> (private)). We denote the corresponding mass-one normalized bump by \(\rho _n := (\text{shrinkingBump}_n).\text{normed}\), so \(\int _E \rho _n = 1\), \(\rho _n \ge 0\), and \(\operatorname{supp}\rho _n \subseteq B_{r_{\text{out}}^{(n)}}\). The radii satisfy </p>
+<div class="displaymath" id="a0000000109">
+  \begin{equation*}  r_{\text{out}}^{(n)} = \frac{1}{n+1} \; \to \;  0 \quad \text{as } n \to \infty \end{equation*}
+</div>
+<p> (<span class="ttfamily">DeGiorgi.tendsto_shrinkingBump_rOut</span> (private)). </p>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:tsupport_conv">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.24</span>
+    <span class="lemma_thmtitle">Support of a convolution</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:tsupport_conv">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000110"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declarations <span class="ttfamily">DeGiorgi.tsupport_convolution_subset_cthickening</span>, <span class="ttfamily">DeGiorgi.tsupport_normed_convolution_subset_cthickening</span>.)</i></p>
+<p>If \(\operatorname{supp}\kappa \subseteq \overline{B_{r}}\) and \(u\) has compact support, then </p>
+<div class="displaymath" id="a0000000111">
+  \begin{equation*}  \operatorname{supp}(\kappa * u) \; \subseteq \;  \{ x \in E : \operatorname{dist}(x, \operatorname{supp}u) \le r\} . \end{equation*}
+</div>
+<p> In particular, \(\operatorname{supp}(\rho _n * u) \subseteq \{ x : \operatorname{dist}(x,\operatorname{supp}u) \le r_{\text{out}}^{(n)}\} \). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000110">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Pointwise, \((\kappa * u)(x) = \int \kappa (y) u(x - y)\, dy\) vanishes unless there exists \(y \in \operatorname{supp}\kappa \) and \(z \in \operatorname{supp}u\) with \(x = y + z\), hence \(\operatorname{dist}(x, z) = \| y\|  \le r\). Closing under the topology, the closure is contained in the closed \(r\)-thickening, which is closed. </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:Lp_contraction_conv">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">2.25</span>
+    <span class="proposition_thmtitle">\(L^{p}\)-contraction of normed convolution</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#prop:Lp_contraction_conv">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000112"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.eLpNorm_normedConvolution_le</span>.)</i></p>
+<p>Let \(\rho \in C_c^\infty (E)\) with \(\rho \ge 0\) and \(\int _E \rho = 1\), and let \(1 \le p {\lt} \infty \). Then for every \(f \in L^{p}(E)\), </p>
+<div class="displaymath" id="a0000000113">
+  \begin{equation*}  \| \rho * f\| _{L^{p}(E)} \le \| f\| _{L^{p}(E)}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000112">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Define the probability measure \(\nu \) on \(E\) by \(d\nu = \rho \, d\, \mathrm{vol}\), which is a probability measure since \(\rho \ge 0\) and \(\int \rho = 1\). For each \(x \in E\), </p>
+<div class="displaymath" id="a0000000114">
+  \begin{equation*}  (\rho * f)(x) = \int _E f(x - y)\, d\nu (y). \end{equation*}
+</div>
+<p> By the integral form of Jensen’s inequality applied to the convex function \(t \mapsto t^p\) on \([0,\infty )\) (<span class="ttfamily">ConvexOn.map_integral_le</span>), </p>
+<div class="displaymath" id="a0000000115">
+  \begin{equation*}  |(\rho * f)(x)|^p \le \left(\int _E |f(x-y)|\, d\nu (y)\right)^p \le \int _E |f(x-y)|^p \, d\nu (y) = (\rho * |f|^p)(x). \end{equation*}
+</div>
+<p> Integrating in \(x\) and using Fubini together with \(\int \rho = 1\), </p>
+<div class="displaymath" id="a0000000116">
+  \begin{equation*}  \int _E |(\rho * f)(x)|^p\, dx \le \int _E (\rho * |f|^p)(x)\, dx = \left(\int _E \rho \right)\left(\int _E |f|^p\right) = \| f\| _{L^{p}}^p. \end{equation*}
+</div>
+<p> Taking \(p\)-th roots gives the claim. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:conv_sub">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">2.26</span>
+    <span class="corollary_thmtitle">Convolution is linear on differences</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#cor:conv_sub">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000117"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declarations <span class="ttfamily">DeGiorgi.normedConvolution_sub_eq</span>, <span class="ttfamily">DeGiorgi.eLpNorm_normedConvolution_sub_le</span>.)</i></p>
+<p>Under the assumptions of Proposition&#160;<a href="sec-sobolev.html#prop:Lp_contraction_conv">2.25</a> we also have, for \(f, g \in L^{p}(E)\), </p>
+<div class="displaymath" id="a0000000118">
+  \begin{equation*}  \| \rho * f - \rho * g\| _{L^{p}(E)} = \| \rho * (f - g)\| _{L^{p}(E)} \le \| f - g\| _{L^{p}(E)}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000117">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Linearity of \(f \mapsto \rho * f\) on locally integrable functions yields the equality, after which Proposition&#160;<a href="sec-sobolev.html#prop:Lp_contraction_conv">2.25</a> applies to \(f - g\). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:conv_approx_cont">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.27</span>
+    <span class="lemma_thmtitle">Convolution by a shrinking bump approximates a continuous function</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:conv_approx_cont">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000119"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.tendsto_eLpNorm_normedConvolution_sub_of_continuous</span>.)</i></p>
+<p>Let \(g \in C_c(E)\) and \(1 \le p {\lt} \infty \). Then </p>
+<div class="displaymath" id="a0000000120">
+  \begin{equation*}  \| \rho _n * g - g\| _{L^{p}(E)} \; \to \;  0 \quad \text{as } n \to \infty . \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000119">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Choose \(S := \{ x : \operatorname{dist}(x, \operatorname{supp}g) \le 1\} \) and \(T := \{ x : \operatorname{dist}(x, \operatorname{supp}g) \le 2\} \), both compact, with \(S \subseteq T\). The function \(g\) is uniformly continuous on the compact set \(T\). Fix \(\varepsilon {\gt} 0\) and let \(\varepsilon _0 := \varepsilon / (\mathrm{vol}(S)^{1/p} + 1)\). By uniform continuity, there exists \(\delta _0 {\gt} 0\) such that \(|g(y) - g(x)| {\lt} \varepsilon _0\) whenever \(x, y \in T\) with \(\operatorname{dist}(x, y) {\lt} \delta _0\). Set \(\delta := \min (\delta _0, 1)\). </p>
+<p>For \(n\) large enough that \(r_{\text{out}}^{(n)} {\lt} \delta \), we have \(\operatorname{supp}(\rho _n * g) \subseteq S\) (Lemma&#160;<a href="sec-sobolev.html#lem:tsupport_conv">2.24</a>, since \(r_{\text{out}}^{(n)} \le 1\)). Pointwise, for \(x \in S\), </p>
+<div class="displaymath" id="a0000000121">
+  \begin{equation*}  |(\rho _n * g)(x) - g(x)| = \left|\int _E \rho _n(y) (g(x - y) - g(x))\, dy\right| \le \varepsilon _0, \end{equation*}
+</div>
+<p> since \(\rho _n\) is supported in \(B_{r_{\text{out}}^{(n)}} \subseteq B_{\delta }\) and both \(x, x - y \in T\) for \(y \in \operatorname{supp}\rho _n\). For \(x \notin S\) both \((\rho _n * g)(x)\) and \(g(x)\) vanish. </p>
+<p>The bound \(\| \rho _n * g - g\| _{L^{p}(E)} \le \varepsilon _0 \, \mathrm{vol}(S)^{1/p}\) then follows from <span class="ttfamily">eLpNorm_sub_le_of_dist_bdd</span>, and the choice of \(\varepsilon _0\) gives this is less than \(\varepsilon \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:conv_approx_Lp">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.28</span>
+    <span class="theorem_thmtitle">Convolution by a shrinking bump approximates an \(L^{p}\) function</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:conv_approx_Lp">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000122"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.tendsto_eLpNorm_normedConvolution_sub</span>.)</i></p>
+<p>Let \(1 \le p {\lt} \infty \) and \(f \in L^{p}(E)\). Then </p>
+<div class="displaymath" id="a0000000123">
+  \begin{equation*}  \| \rho _n * f - f\| _{L^{p}(E)} \; \to \;  0 \quad \text{as } n \to \infty . \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000122">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>By density of smooth compactly supported functions in \(L^{p}\) (Mathlib’s <span class="ttfamily">MemLp.exist_eLpNorm_sub_le</span>), for any \(\varepsilon {\gt} 0\) there exists \(g \in C_c^\infty (E)\) with \(\| f - g\| _{L^{p}} {\lt} \varepsilon /3\). Then by the triangle inequality </p>
+<div class="displaymath" id="a0000000124">
+  \begin{equation*}  \| \rho _n * f - f\| _{L^{p}} \le \| \rho _n * f - \rho _n * g\| _{L^{p}} + \| \rho _n * g - g\| _{L^{p}} + \| g - f\| _{L^{p}}. \end{equation*}
+</div>
+<p> By Corollary&#160;<a href="sec-sobolev.html#cor:conv_sub">2.26</a> the first term is at most \(\| f - g\| _{L^{p}} {\lt} \varepsilon /3\). By Lemma&#160;<a href="sec-sobolev.html#lem:conv_approx_cont">2.27</a> the middle term tends to \(0\), so for \(n\) large it is less than \(\varepsilon /3\). The last term is also less than \(\varepsilon /3\). Hence \(\| \rho _n * f - f\| _{L^{p}} {\lt} \varepsilon \) for all sufficiently large \(n\), proving convergence to zero. </p>
+
+  </div>
+</div>
+<h1 id="a0000000006">2.5 Uniqueness of the weak gradient and global smooth approximation</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:weak_grad_unique">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.29</span>
+    <span class="theorem_thmtitle">Uniqueness of the weak gradient</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:weak_grad_unique">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000125"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_partial_unique">Lemma 2.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.ae_eq_p" class="lean_decl">DeGiorgi.MemW1pWitness.ae_eq_p</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.MemW1pWitness.ae_eq" class="lean_decl">DeGiorgi.MemW1pWitness.ae_eq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open, \(1 \le p {\lt} \infty \), and \(f\) a function with two \(W^{1,p}\)-witnesses on \(\Omega \) giving rise to weak gradient fields \(G_1, G_2\). Then \(G_1 = G_2\) a.e. on \(\Omega \). The same holds for \(H^1\) witnesses (\(p = 2\)). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000125">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply Lemma&#160;<a href="sec-sobolev.html#lem:weak_partial_unique">2.3</a> componentwise to \((G_1)_i\) and \((G_2)_i\), then assemble: a.e. all components agree, so the vectors themselves agree a.e. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:conv_fderiv_weak_partial">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.30</span>
+    <span class="lemma_thmtitle">Convolution differentiates against the weak partial derivative</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:conv_fderiv_weak_partial">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000126"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.convolution_fderiv_eq_convolution_weakPartial_univ</span>.)</i></p>
+<p>Let \(u \in L^1_{loc}(E)\) and let \(g\) be the weak \(i\)-th partial derivative of \(u\) on \(E\). Then for every \(\varphi \in C_c^\infty (E)\) and every \(x \in E\), </p>
+<div class="displaymath" id="a0000000127">
+  \begin{equation*}  \bigl((\partial _i\varphi ) * u\bigr)(x) = (\varphi * g)(x). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000126">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>For fixed \(x\), define the test function \(\psi (t) := \varphi (x - t)\), which is smooth and compactly supported. A direct computation shows \((\partial _i \psi )(t) = -(\partial _i\varphi )(x - t)\) (chain rule with the sign-flipping translation). The weak-derivative identity for \(u\) tested against \(\psi \) then reads </p>
+<div class="displaymath" id="a0000000128">
+  \begin{equation*}  \int _E u(t)\, (\partial _i\psi )(t)\, dt = -\int _E g(t)\, \psi (t)\, dt, \end{equation*}
+</div>
+<p> i.e., </p>
+<div class="displaymath" id="a0000000129">
+  \begin{equation*}  -\int _E u(t)\, (\partial _i\varphi )(x - t)\, dt = -\int _E g(t)\, \varphi (x - t)\, dt. \end{equation*}
+</div>
+<p> Cancelling the minus signs and rewriting both sides as convolutions yields the claim. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:smooth_approx_univ">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.31</span>
+    <span class="theorem_thmtitle">Smooth compactly supported approximation on \(E\) for compactly supported \(W^{1,p}\) functions</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:smooth_approx_univ">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000130"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:zero_outside_tsupport">Lemma 2.22</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:tsupport_conv">Lemma 2.24</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:conv_approx_Lp">Theorem 2.28</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:conv_fderiv_weak_partial">Lemma 2.30</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.exists_smooth_compactSupport_W1p_approx_univ" class="lean_decl">DeGiorgi.exists_smooth_compactSupport_W1p_approx_univ</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(1 {\lt} p {\lt} \infty \), and let \(u : E \to \mathbb {R}\) be compactly supported with a \(W^{1,p}\)-witness on \(E\) with weak gradient \(G\). Then there exists a sequence \((\varphi _n)\) of smooth compactly supported functions on \(E\) with </p>
+<div class="displaymath" id="a0000000131">
+  \begin{align*}  \operatorname{supp}\varphi _n & \subseteq \{ x : \operatorname{dist}(x, \operatorname{supp}u) \le r_{\text{out}}^{(n)}\} , \\ \| \varphi _n - u\| _{L^{p}(E)} & \to 0, \\ \| \partial _i\varphi _n - G_i\| _{L^{p}(E)} & \to 0 \quad \text{for every } i. \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000130">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Define \(\varphi _n := \rho _n * u\). Since \(u\) is compactly supported and \(\rho _n \in C_c^\infty (E)\), \(\varphi _n\) is smooth and has support contained in the \(r_{\text{out}}^{(n)}\)-thickening of \(\operatorname{supp}u\) (Lemma&#160;<a href="sec-sobolev.html#lem:tsupport_conv">2.24</a>). The \(L^{p}\) approximation \(\varphi _n \to u\) is exactly Theorem&#160;<a href="sec-sobolev.html#thm:conv_approx_Lp">2.28</a> applied to \(u\). </p>
+<p>For the gradients, the classical fact </p>
+<div class="displaymath" id="a0000000132">
+  \begin{equation*}  \partial _i (\rho _n * u) = (\partial _i \rho _n) * u \end{equation*}
+</div>
+<p> (Mathlib’s <span class="ttfamily">HasCompactSupport.hasFDerivAt_convolution_left</span>) combined with Lemma&#160;<a href="sec-sobolev.html#lem:conv_fderiv_weak_partial">2.30</a> (with \(u\) on the right and the smooth \(\rho _n\) on the left) yields </p>
+<div class="displaymath" id="a0000000133">
+  \begin{equation*}  \partial _i \varphi _n = (\partial _i\rho _n) * u = \rho _n * G_i, \end{equation*}
+</div>
+<p> since \(G_i\) is the weak partial derivative of \(u\) on \(E\). Applying Theorem&#160;<a href="sec-sobolev.html#thm:conv_approx_Lp">2.28</a> to \(G_i \in L^{p}(E)\) then gives \(\partial _i\varphi _n - G_i = \rho _n * G_i - G_i \to 0\) in \(L^{p}(E)\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:smooth_approx_local">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.32</span>
+    <span class="theorem_thmtitle">Smooth approximation for a witness supported in a compact subset</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:smooth_approx_local">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000134"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:smooth_cutoff">Lemma 2.21</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:zero_outside_tsupport">Lemma 2.22</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:smooth_approx_univ">Theorem 2.31</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.exists_smooth_W1p_approx_of_supportedWitness" class="lean_decl">DeGiorgi.exists_smooth_W1p_approx_of_supportedWitness</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(\Omega \) be open, \(1 {\lt} p {\lt} \infty \), and let \(u\) have a \(W^{1,p}\)-witness on \(\Omega \) with gradient field \(G\). Suppose \(K \subseteq \Omega \) is compact with \(\operatorname{supp}u \subseteq K\) and \(\operatorname{supp}G_i \subseteq K\) for every \(i\). Then there exists a sequence \((\varphi _n)\) of smooth compactly supported functions with \(\operatorname{supp}\varphi _n \subseteq \Omega \) such that </p>
+<div class="displaymath" id="a0000000135">
+  \begin{align*}  \| \varphi _n - u\| _{L^{p}(\Omega )} & \to 0, \\ \| \partial _i\varphi _n - G_i\| _{L^{p}(\Omega )} & \to 0 \quad \text{for every } i. \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000134">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Choose \(\delta {\gt} 0\) so that the closed \(\delta \)-thickening \(K' := \{ x : \operatorname{dist}(x,K) \le \delta \} \) is contained in \(\Omega \) (<span class="ttfamily">IsCompact.exists_cthickening_subset_open</span>), and a smooth cutoff \(\chi \) as in Lemma&#160;<a href="sec-sobolev.html#lem:smooth_cutoff">2.21</a> satisfying \(\chi = 1\) on \(K'\) and \(\operatorname{supp}\chi \subseteq \Omega \). </p>
+<p>We promote the local witness on \(\Omega \) to a witness on the whole space \(E\) with the same gradient field. The \(L^{p}\)-membership extends to all of \(E\) because \(u\) and each \(G_i\) vanish outside \(K \subseteq \Omega \) (Lemma&#160;<a href="sec-sobolev.html#lem:zero_outside_tsupport">2.22</a>). To verify the weak-gradient identity on \(E\), take any test function \(\varphi \in C_c^\infty (E)\) and consider \(\psi := \chi \varphi \). Then \(\psi \in C_c^\infty \) and \(\operatorname{supp}\psi \subseteq \Omega \), so the witness on \(\Omega \) gives </p>
+<div class="displaymath" id="a0000000136">
+  \begin{equation*}  \int _\Omega u(x)\, \partial _i\psi (x)\, dx = -\int _\Omega G_i(x)\, \psi (x)\, dx. \end{equation*}
+</div>
+<p> On \(K\) we have \(\chi = 1\) and \(\partial _i\chi = 0\) (because \(\chi \) is constant equal to \(1\) on the larger neighborhood \(K'\) of \(K\)); since \(u\) and \(G_i\) are both supported in \(K\), this gives pointwise on \(E\) </p>
+<div class="displaymath" id="a0000000137">
+  \begin{equation*}  u(x)\, \partial _i\psi (x) = u(x)\, \partial _i\varphi (x), \qquad G_i(x)\, \psi (x) = G_i(x)\, \varphi (x), \end{equation*}
+</div>
+<p> and the integral identity transfers from \(\psi \) to \(\varphi \). </p>
+<p>Now apply Theorem&#160;<a href="sec-sobolev.html#thm:smooth_approx_univ">2.31</a> on the whole space to get a sequence \((\widetilde\varphi _m)\) with </p>
+<div class="displaymath" id="a0000000138">
+  \begin{equation*}  \operatorname{supp}\widetilde\varphi _m \subseteq \{ x : \operatorname{dist}(x, \operatorname{supp}u) \le r_{\text{out}}^{(m)}\} . \end{equation*}
+</div>
+<p> For \(m\) large enough that \(r_{\text{out}}^{(m)} \le \delta \), this support is contained in \(K' \subseteq \Omega \). Setting \(\varphi _n := \widetilde\varphi _{n+N}\) for an appropriate \(N\) furnishes the desired sequence: the support condition holds for every \(n\), and \(L^{p}(\Omega )\)-convergence follows from \(L^{p}(E)\)-convergence by monotonicity of the \(L^{p}\)-norm in the underlying measure (<span class="ttfamily">eLpNorm_mono_measure</span>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:memW01p_of_compactly_supported">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.33</span>
+    <span class="theorem_thmtitle">Localization: compactly supported \(W^{1,p}\) implies \(W_0^{1,p}\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:memW01p_of_compactly_supported">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000139"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#prop:witness_mul_smooth_bounded">Proposition 2.16</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:smooth_cutoff">Lemma 2.21</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:smooth_approx_local">Theorem 2.32</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.memW01p_of_memW1p_of_tsupport_subset" class="lean_decl">DeGiorgi.memW01p_of_memW1p_of_tsupport_subset</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(\Omega \subseteq E\) be open, \(1 {\lt} p {\lt} \infty \), and \(u \in W^{1,p}(\Omega )\) with compact support and \(\operatorname{supp}u \subseteq \Omega \). Then \(u \in W_0^{1,p}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000139">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Choose any \(W^{1,p}\)-witness for \(u\) on \(\Omega \), with gradient field \(G\). Pick \(\delta {\gt} 0\) such that the closed \(\delta \)-thickening of \(\operatorname{supp}u\) is contained in \(\Omega \), and let \(K\) be that thickening. Apply Lemma&#160;<a href="sec-sobolev.html#lem:smooth_cutoff">2.21</a> to obtain a smooth cutoff \(\eta \) equal to \(1\) on \(K\) with \(\operatorname{supp}\eta \subseteq \Omega \). Since \(\eta \) is smooth and compactly supported, both \(|\eta |\) and \(\| D\eta \| \) are bounded by some constants \(C_0 := 1\) and \(C_1 \ge 0\) (the latter using continuity of \(D\eta \) on its compact support, <span class="ttfamily">HasCompactSupport.exists_bound_of_continuousOn</span>). </p>
+<p>By Proposition&#160;<a href="sec-sobolev.html#prop:witness_mul_smooth_bounded">2.16</a> the function \(v := \eta u\) admits a \(W^{1,p}\)-witness. Since \(\eta = 1\) on a neighborhood of \(\operatorname{supp}u\) and \(u = 0\) outside \(\operatorname{supp}u\), we have \(v = u\) pointwise. Moreover, \(\operatorname{supp}v \subseteq \operatorname{supp}\eta \) (a compact subset of \(\Omega \)), and the same is true for each component of the new gradient, by <span class="ttfamily">DeGiorgi.tsupport_mul_smooth_bounded_p_weakGrad_component_subset</span> (private). </p>
+<p>We are now in the situation of Theorem&#160;<a href="sec-sobolev.html#thm:smooth_approx_local">2.32</a> with \(K := \operatorname{supp}\eta \). The resulting smooth approximating sequence shows \(u = v\) belongs to \(W_0^{1,p}(\Omega )\). </p>
+
+  </div>
+</div>
+<h1 id="a0000000007">2.6 Whole-space Sobolev inequality</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:C_gns">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">2.34</span>
+    <span class="definition_thmtitle">Sobolev constant</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#def:C_gns">#</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_gns" class="lean_decl">DeGiorgi.C_gns</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   For \(d \in \mathbb {N}_{\ge 1}\) and \(p \in \mathbb {R}\), define </p>
+<div class="displaymath" id="a0000000140">
+  \begin{equation*}  C_{\mathrm{gns}}(d, p) := \mathrm{SNormLESNormFDerivOfEqConst_{\mathbb {R}}}\bigl(\mathrm{vol}_{\mathbb {R}^d}, p\bigr), \end{equation*}
+</div>
+<p> the constant supplied by Mathlib’s general \(W^{1,p} \hookrightarrow L^{p^*}\) embedding. By construction, \(C_{\mathrm{gns}}(d,p) \ge 0\) (<span class="ttfamily">DeGiorgi.C_gns_nonneg</span>). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:sobolev_exp">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.35</span>
+    <span class="lemma_thmtitle">Sobolev exponent</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:sobolev_exp">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000141"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declarations <span class="ttfamily">DeGiorgi.sobolev_exp_pos</span>, <span class="ttfamily">DeGiorgi.sobolev_exponent_relation</span>.)</i></p>
+<p>Let \(1 \le p {\lt} d\). Then \(\frac{dp}{d - p} {\gt} 0\), and </p>
+<div class="displaymath" id="a0000000142">
+  \begin{equation*}  \left(\frac{dp}{d - p}\right)^{-1} = \frac{1}{p} - \frac{1}{d}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000141">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Both numerator \(dp\) and denominator \(d - p\) are positive (since \(d \ge 1\) and \(p {\lt} d\)). The exponent identity follows by direct algebraic manipulation \(\frac{d - p}{dp} = \frac{1}{p} - \frac{1}{d}\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sobolev_smooth">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.36</span>
+    <span class="theorem_thmtitle">Sobolev inequality for smooth compactly supported functions</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:sobolev_smooth">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000143"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:C_gns">Definition 2.34</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:sobolev_exp">Lemma 2.35</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.sobolev_smooth" class="lean_decl">DeGiorgi.sobolev_smooth</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(1 \le p {\lt} d\), \(u \in C_c^1(E)\). Then </p>
+<div class="displaymath" id="a0000000144">
+  \begin{equation*}  \| u\| _{L^{p^*}(E)} \le C_{\mathrm{gns}}(d, p)\, \| Du\| _{L^p(E)}, \qquad p^* = \frac{dp}{d-p}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000143">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>This is a direct application of Mathlib’s general result <span class="ttfamily">MeasureTheory.eLpNorm_le_eLpNorm_fderiv_of_eq</span> with the exponent relation supplied by Lemma&#160;<a href="sec-sobolev.html#lem:sobolev_exp">2.35</a> (rewritten in terms of \(\mathrm{Real.toNNReal}\) to match the Mathlib API). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:norm_fderiv">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.37</span>
+    <span class="lemma_thmtitle">Operator norm of the differential equals partials norm</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:norm_fderiv">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000145"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  <i class="itshape">(Formalized as private declaration <span class="ttfamily">DeGiorgi.norm_fderiv_eq_norm_partials</span>.)</i></p>
+<p>For any \(f : E \to \mathbb {R}\) with derivative \(Df(x)\) at \(x\), </p>
+<div class="displaymath" id="a0000000146">
+  \begin{equation*}  \| Df(x)\|  = \left(\sum _{i=1}^d |\partial _i f(x)|^2\right)^{1/2}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000145">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>By Riesz representation in the Hilbert space \(E\), \(Df(x)\) corresponds to a unique \(v \in E\) with \(Df(x) = \langle v, \cdot \rangle \), and \(\| Df(x)\|  = \| v\| \). Evaluating at the standard basis vector \(e_i\) gives \(v_i = Df(x)(e_i) = \partial _i f(x)\), so \(\| v\| ^2 = \sum _i |\partial _i f(x)|^2\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sobolev_of_approx">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">2.38</span>
+    <span class="theorem_thmtitle">Sobolev inequality from approximating sequences</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#thm:sobolev_of_approx">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000147"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:C_gns">Definition 2.34</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:sobolev_smooth">Theorem 2.36</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:norm_fderiv">Lemma 2.37</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.sobolev_of_approx" class="lean_decl">DeGiorgi.sobolev_of_approx</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>    Let \(1 \le p {\lt} d\), \(u : E \to \mathbb {R}\) a.e. strongly measurable, and \(G : E \to E\) a vector field whose components are a.e. strongly measurable. Suppose there is a sequence \((\varphi _n)\) of smooth compactly supported functions on \(E\) with </p>
+<div class="displaymath" id="a0000000148">
+  \begin{equation*}  \| \varphi _n - u\| _{L^{p}(E)} \to 0, \qquad \| \partial _i\varphi _n - G_i\| _{L^{p}(E)} \to 0 \; \text{ for every } i. \end{equation*}
+</div>
+<p> Then </p>
+<div class="displaymath" id="a0000000149">
+  \begin{equation*}  \| u\| _{L^{p^*}(E)} \le C_{\mathrm{gns}}(d,p)\, \| \, \| G(\cdot )\| \, \| _{L^{p}(E)}, \qquad p^* = \frac{dp}{d-p}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000147">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply Theorem&#160;<a href="sec-sobolev.html#thm:sobolev_smooth">2.36</a> to each \(\varphi _n\): </p>
+<div class="displaymath" id="a0000000150">
+  \begin{equation*}  \| \varphi _n\| _{L^{p^*}} \le C_{\mathrm{gns}}(d,p)\, \| D\varphi _n\| _{L^p}. \end{equation*}
+</div>
+<p> Define \(\Phi _n(x) := (\partial _1\varphi _n(x),\ldots ,\partial _d\varphi _n(x))\), the vector of classical partial derivatives. By Lemma&#160;<a href="sec-sobolev.html#lem:norm_fderiv">2.37</a>, \(\| D\varphi _n(x)\|  = \| \Phi _n(x)\| \), hence \(\| D\varphi _n\| _{L^p} = \| \, \| \Phi _n\| \, \| _{L^p}\). </p>
+<p>By the triangle inequality applied componentwise (and bounding the Euclidean norm of a vector by the sum of the norms of its components, see <span class="ttfamily">DeGiorgi.gradVec_eLpNorm_le_sum</span> (private)), </p>
+<div class="displaymath" id="a0000000151">
+  \begin{equation*}  \| \Phi _n - G\| _{L^p(E; E)} \le \sum _{i=1}^d \| \partial _i\varphi _n - G_i\| _{L^{p}(E)} \; \to \;  0. \end{equation*}
+</div>
+<p> Hence \(\| \, \| \Phi _n\| \, \| _{L^p} \to \| \, \| G\| \, \| _{L^p}\), by reverse triangle inequality \(|\, \| \Phi _n(x)\|  - \| G(x)\| \, | \le \| \Phi _n(x) - G(x)\| \). </p>
+<p>Convergence in \(L^p\) implies convergence in measure (<span class="ttfamily">tendstoInMeasure_of_tendsto_eLpNorm</span>), so by passing to a subsequence we may assume \(\varphi _{\sigma (n)} \to u\) a.e. By Fatou’s lemma applied to \(L^{p^*}\) (<span class="ttfamily">Lp.eLpNorm_lim_le_liminf_eLpNorm</span>), </p>
+<div class="displaymath" id="a0000000152">
+  \begin{equation*}  \| u\| _{L^{p^*}} \le \liminf _{n\to \infty } \| \varphi _{\sigma (n)}\| _{L^{p^*}} \le \liminf _{n\to \infty } C_{\mathrm{gns}}(d,p)\, \| \, \| \Phi _{\sigma (n)}\| \, \| _{L^p}. \end{equation*}
+</div>
+<p> The right-hand side \(\liminf \) is bounded above by \(C_{\mathrm{gns}}(d,p)\, \|  \, \| G\| \, \| _{L^p}\), since \(\| \, \| \Phi _{\sigma (n)}\| \, \| _{L^p} \le \| \, \| G\| \, \| _{L^p} + \| \Phi _{\sigma (n)} - G\| _{L^p}\) and the second term tends to zero, using <span class="ttfamily">ENNReal.liminf_add_of_right_tendsto_zero</span>. Combining yields the claim. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:sobolev_W01p">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">2.39</span>
+    <span class="corollary_thmtitle">Sobolev inequality on \(W_0^{1,p}(E)\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#cor:sobolev_W01p">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000153"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#def:C_gns">Definition 2.34</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:sobolev_of_approx">Theorem 2.38</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.sobolev_of_memW01p_univ" class="lean_decl">DeGiorgi.sobolev_of_memW01p_univ</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>    Let \(1 \le p {\lt} d\) and \(u \in W_0^{1,p}(E)\). Then there exists a \(W^{1,p}\)-witness for \(u\) on \(E\) such that </p>
+<div class="displaymath" id="a0000000154">
+  \begin{equation*}  \| u\| _{L^{p^*}(E)} \le C_{\mathrm{gns}}(d,p)\, \| \, \| G(\cdot )\| \, \| _{L^{p}(E)}, \qquad p^* = \frac{dp}{d - p}, \end{equation*}
+</div>
+<p> where \(G\) is the weak gradient field carried by the witness. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000153">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>By Definition&#160;<a href="sec-sobolev.html#def:MemW01p">2.10</a>, \(u \in W_0^{1,p}(E)\) comes equipped with a \(W^{1,p}\)-witness on \(E\) and an approximating sequence \((\varphi _n)\) of smooth compactly supported functions converging to \(u\) and whose classical gradients converge to the weak gradient \(G\) in \(L^{p}\). The hypotheses of Theorem&#160;<a href="sec-sobolev.html#thm:sobolev_of_approx">2.38</a> are satisfied, and its conclusion is exactly the desired inequality. </p>
+
+  </div>
+</div>
+<h1 id="a0000000008">2.7 Positive-part prelude</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:indicator_component_memLp">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.40</span>
+    <span class="lemma_thmtitle">Indicator truncation preserves \(L^2\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:indicator_component_memLp">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000155"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.indicator_component_memLp" class="lean_decl">DeGiorgi.indicator_component_memLp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   Let \(\Omega \subseteq E\), \(\sigma : E \to \mathbb {R}\) be a.e. measurable on \(\Omega \) and \(g \in L^{2}(\Omega )\). Then the function </p>
+<div class="displaymath" id="a0000000156">
+  \begin{equation*}  x \mapsto \mathbf{1}_{\{ \sigma {\gt} 0\} }(x)\, g(x) \end{equation*}
+</div>
+<p> also lies in \(L^{2}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000155">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>The set \(\{ \sigma {\gt} 0\} \) is measurable since \(\sigma \) is a.e. measurable, so the indicator multiplication preserves a.e. strong measurability. Pointwise, \(|\mathbf{1}_{\{ \sigma {\gt} 0\} }(x)\, g(x)| \le |g(x)|\), and squaring, integrating and applying the \(L^{2}\) membership of \(g\) gives the conclusion. </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:posPartGrad">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">2.41</span>
+    <span class="lemma_thmtitle">Truncated weak-gradient component in \(L^2\)</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-sobolev.html#lem:posPartGrad">#</a>
+    
+    <a class="icon proof" href="sec-sobolev.html#a0000000157"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:indicator_component_memLp">Lemma 2.40</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.posPartGrad_component_memLp" class="lean_decl">DeGiorgi.posPartGrad_component_memLp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>    Let \(u \in H^1(\Omega )\) with \(H^1\)-witness gradient field \(G\). For each \(i \in \{ 1,\ldots ,d\} \), the function </p>
+<div class="displaymath" id="a0000000158">
+  \begin{equation*}  x \mapsto \mathbf{1}_{\{ u {\gt} 0\} }(x)\, G_i(x) \end{equation*}
+</div>
+<p> belongs to \(L^{2}(\Omega )\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000157">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply Lemma&#160;<a href="sec-sobolev.html#lem:indicator_component_memLp">2.40</a> with \(\sigma := u\) and \(g := G_i\), both of which lie in the relevant \(L^{2}\) spaces (the second by the witness assumption). </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="sec-intro.html" title="Introduction"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="De Giorgi–Nash–Moser theory in Lean: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sec-functional.html" title="Functional Inequalities"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>

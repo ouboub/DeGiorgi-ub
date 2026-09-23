@@ -1,0 +1,3300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Crossover, Weak Harnack, Harnack, and Hölder Regularity</title>
+<link rel="prev" href="sec-moser.html" title="Moser Iteration and Supersolution Estimates" />
+<link rel="up" href="index.html" title="De Giorgi–Nash–Moser theory in Lean: blueprint" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">De Giorgi–Nash–Moser theory in Lean: blueprint</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sec-intro.html"><span class="toc_ref">1</span> <span class="toc_entry">Introduction</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html"><span class="toc_ref">2</span> <span class="toc_entry">Sobolev Spaces and Weak Derivatives</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-sobolev.html#a0000000002"><span class="toc_ref">2.1</span> <span class="toc_entry">Weak partial derivatives and weak gradients</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000003"><span class="toc_ref">2.2</span> <span class="toc_entry">Sobolev membership and weak-gradient witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000004"><span class="toc_ref">2.3</span> <span class="toc_entry">Cutoffs and zero-extension</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000005"><span class="toc_ref">2.4</span> <span class="toc_entry">Convolution smoothing</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000006"><span class="toc_ref">2.5</span> <span class="toc_entry">Uniqueness of the weak gradient and global smooth approximation</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000007"><span class="toc_ref">2.6</span> <span class="toc_entry">Whole-space Sobolev inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-sobolev.html#a0000000008"><span class="toc_ref">2.7</span> <span class="toc_entry">Positive-part prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-functional.html"><span class="toc_ref">3</span> <span class="toc_entry">Functional Inequalities</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-functional.html#a0000000009"><span class="toc_ref">3.1</span> <span class="toc_entry">Poincaré inequality on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000010"><span class="toc_ref">3.2</span> <span class="toc_entry">Sobolev–Poincaré on the unit ball</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000011"><span class="toc_ref">3.3</span> <span class="toc_entry">Stampacchia truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000012"><span class="toc_ref">3.4</span> <span class="toc_entry">BMO and the John–Nirenberg geometry</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000013"><span class="toc_ref">3.5</span> <span class="toc_entry">Simple iteration lemma</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000014"><span class="toc_ref">3.6</span> <span class="toc_entry">Local John–Nirenberg theorem</span></a>
+ </li>
+<li class="">
+  <a href="sec-functional.html#a0000000015"><span class="toc_ref">3.7</span> <span class="toc_entry">Campanato characterisation of Hölder spaces</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html"><span class="toc_ref">4</span> <span class="toc_entry">Ball Extension, Approximation, and Supporting Tools</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-extension.html#a0000000016"><span class="toc_ref">4.1</span> <span class="toc_entry">Sobolev chain rule</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000017"><span class="toc_ref">4.2</span> <span class="toc_entry">Smooth approximation on the unit ball</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Rescaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000019"><span class="toc_ref"></span> <span class="toc_entry">Inward and outward dilation</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">One-shot smooth approximation</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000021"><span class="toc_ref">4.3</span> <span class="toc_entry">The unit-ball extension operator</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-extension.html#a0000000022"><span class="toc_ref"></span> <span class="toc_entry">Definitions and elementary algebra</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000023"><span class="toc_ref"></span> <span class="toc_entry">Geometry of inversion</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000024"><span class="toc_ref"></span> <span class="toc_entry">Smooth-input extension estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000025"><span class="toc_ref"></span> <span class="toc_entry">Smooth approximation of the extension on a rough input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">Smooth blends and approximation control</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000027"><span class="toc_ref"></span> <span class="toc_entry">The smoothing theorem on a smooth input</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">The main extension theorems</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000029"><span class="toc_ref">4.4</span> <span class="toc_entry">Positive-part machinery</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000030"><span class="toc_ref">4.5</span> <span class="toc_entry">\(L^p\) function toolkit</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000031"><span class="toc_ref">4.6</span> <span class="toc_entry">Finite covering</span></a>
+ </li>
+<li class="">
+  <a href="sec-extension.html#a0000000032"><span class="toc_ref">4.7</span> <span class="toc_entry">Foundations and shared prelude</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-weakform.html"><span class="toc_ref">5</span> <span class="toc_entry">Elliptic Coefficients and Weak Formulation</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-weakform.html#a0000000033"><span class="toc_ref">5.1</span> <span class="toc_entry">Elliptic coefficient structure</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000034"><span class="toc_ref">5.2</span> <span class="toc_entry">Pointwise bilinear form on Sobolev witnesses</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000035"><span class="toc_ref">5.3</span> <span class="toc_entry">Divergence-form right-hand sides</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000036"><span class="toc_ref">5.4</span> <span class="toc_entry">Smooth test functions and the L\(^2\) coefficient operator</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000037"><span class="toc_ref">5.5</span> <span class="toc_entry">The L\(^2\) coefficient operator and the closed bilinear form</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000038"><span class="toc_ref">5.6</span> <span class="toc_entry">Weak problems and weak solutions</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000039"><span class="toc_ref">5.7</span> <span class="toc_entry">Existence via Lax–Milgram</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000040"><span class="toc_ref">5.8</span> <span class="toc_entry">Weighted bilinear-form estimates</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000041"><span class="toc_ref">5.9</span> <span class="toc_entry">Ball scaling</span></a>
+ </li>
+<li class="">
+  <a href="sec-weakform.html#a0000000042"><span class="toc_ref">5.10</span> <span class="toc_entry">Localization helpers</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html"><span class="toc_ref">6</span> <span class="toc_entry">De Giorgi Iteration and Local Boundedness</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-degiorgi.html#a0000000043"><span class="toc_ref">6.1</span> <span class="toc_entry">Positive-part truncation</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000044"><span class="toc_ref">6.2</span> <span class="toc_entry">Cutoff admissibility</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000045"><span class="toc_ref">6.3</span> <span class="toc_entry">Weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000046"><span class="toc_ref">6.4</span> <span class="toc_entry">Chebyshev bound on superlevel sets</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000047"><span class="toc_ref">6.5</span> <span class="toc_entry">Pre-iteration estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000048"><span class="toc_ref">6.6</span> <span class="toc_entry">De Giorgi iteration sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000049"><span class="toc_ref">6.7</span> <span class="toc_entry">Recurrence and abstract closeout</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000050"><span class="toc_ref">6.8</span> <span class="toc_entry">The De Giorgi \(L^\infty \) bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-degiorgi.html#a0000000051"><span class="toc_ref">6.9</span> <span class="toc_entry">Normalised constants</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html"><span class="toc_ref">7</span> <span class="toc_entry">Moser Iteration and Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sec-moser.html#a0000000052"><span class="toc_ref">7.1</span> <span class="toc_entry">Moser Iteration</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000053"><span class="toc_ref">7.1.1</span> <span class="toc_entry">Moser constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000054"><span class="toc_ref">7.1.2</span> <span class="toc_entry">Geometric sequences</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000055"><span class="toc_ref">7.1.3</span> <span class="toc_entry">Regularized power cutoffs</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000056"><span class="toc_ref">7.1.4</span> <span class="toc_entry">Sobolev preparation and the energy bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000057"><span class="toc_ref">7.1.5</span> <span class="toc_entry">One-step Moser pre-estimate</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000058"><span class="toc_ref">7.1.6</span> <span class="toc_entry">Iteration</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000059"><span class="toc_ref">7.1.7</span> <span class="toc_entry">Closeout to \(L^\infty \)</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000060"><span class="toc_ref">7.2</span> <span class="toc_entry">Supersolution Estimates</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-moser.html#a0000000061"><span class="toc_ref">7.2.1</span> <span class="toc_entry">The weighted Caccioppoli inequality</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000062"><span class="toc_ref">7.2.2</span> <span class="toc_entry">Reverse Holder inequalities (one–step)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000063"><span class="toc_ref">7.2.3</span> <span class="toc_entry">Stage one (inverse iteration)</span></a>
+ </li>
+<li class="">
+  <a href="sec-moser.html#a0000000064"><span class="toc_ref">7.2.4</span> <span class="toc_entry">Stage two (forward low-power iteration)</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sec-crossover.html"><span class="toc_ref">8</span> <span class="toc_entry">Crossover, Weak Harnack, Harnack, and Hölder Regularity</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sec-crossover.html#a0000000065"><span class="toc_ref">8.1</span> <span class="toc_entry">Crossover Estimate</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000066"><span class="toc_ref">8.1.1</span> <span class="toc_entry">Logarithmic gradient bound</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000067"><span class="toc_ref">8.1.2</span> <span class="toc_entry">BMO control of \(\log u\)</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000068"><span class="toc_ref">8.1.3</span> <span class="toc_entry">John–Nirenberg exponential integrability</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000069"><span class="toc_ref">8.1.4</span> <span class="toc_entry">Crossover product bound</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000070"><span class="toc_ref">8.2</span> <span class="toc_entry">Weak Harnack Inequality</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000071"><span class="toc_ref">8.2.1</span> <span class="toc_entry">Support constants</span></a>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000072"><span class="toc_ref">8.2.2</span> <span class="toc_entry">Measure-bound utilities</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sec-crossover.html#a0000000073"><span class="toc_ref">8.3</span> <span class="toc_entry">Harnack Inequality and Holder Regularity</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sec-crossover.html#a0000000074"><span class="toc_ref">8.3.1</span> <span class="toc_entry">Holder regularity</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="sec:crossover">8 Crossover, Weak Harnack, Harnack, and Hölder Regularity</h1>
+
+<h1 id="a0000000065">8.1 Crossover Estimate</h1>
+<p>Let \(d \in \mathbb {N}\), \(d \geq 3\), and \(E = \mathbb {R}^d\) throughout. Write \(B_{r}\) for the open Euclidean ball of radius \(r\) centred at the origin. Given a normalized elliptic coefficient \(A\) on \(B_{1}\) with ellipticity constants \(\lambda _A, \Lambda _A\) (with \(\lambda _A = 1\) after normalization, so \(\Lambda _A \geq 1\)), write \(\mathrm{IsSupersolution}{A}{u}\) for the assertion that \(u \in W^{1,2}_{\mathrm{loc}}\) satisfies \(-\operatorname{div}(A\nabla u) \geq 0\) in the weak sense, and \(\mathrm{IsSolution}{A}{u}\) for the corresponding equality. </p>
+<p>The crossover estimate, due in this form to Moser, bridges positive and negative powers of a positive supersolution. Throughout this section we work with a fixed positive constant </p>
+<div class="displaymath" id="a0000000618">
+  \begin{equation*}  C_{\mathrm{poinc}}= C_{\mathrm{poinc}}(d) {\gt} 0 \end{equation*}
+</div>
+<p> denoting the dimensional Poincaré constant on the unit ball, a fixed constant \(M_{\mathrm{st}}{\gt} 1\) used in the smooth cutoff construction, and the dimensional John–Nirenberg constant \(C_{\mathrm{JN}}(d) {\gt} 0\). </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:c_crossover_bmo_scale">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.1</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:c_crossover_bmo_scale">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.c_crossover_bmo_scale" class="lean_decl">DeGiorgi.c_crossover_bmo_scale</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.c_crossover'" class="lean_decl">DeGiorgi.c_crossover'</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   We define the BMO scale and crossover exponent </p>
+<div class="displaymath" id="a0000000619">
+  \begin{align*}  c_{\mathrm{BMO}}(d) & := \bigl(\mathrm{vol}(B_{1})\bigr)^{-1/2}\, C_{\mathrm{poinc}}(d) \cdot \tfrac 12^{1 - d/2} \cdot 8M_{\mathrm{st}}\, \bigl(\mathrm{vol}(B_{1})\bigr)^{1/2}, \\ c’(d) & := \frac{1}{2\, C_{\mathrm{JN}}(d)\, c_{\mathrm{BMO}}(d) + 1}. \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:c-crossover-bounds">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.2</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:c-crossover-bounds">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000620"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossoverC'_pos" class="lean_decl">DeGiorgi.crossoverC'_pos</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.c_crossover'_lt_one" class="lean_decl">DeGiorgi.c_crossover'_lt_one</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   \(0 {\lt} c'(d) {\lt} 1\) and \(c'(d) \leq 1\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000620">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>The constant \(c_{\mathrm{BMO}}(d)\) is a product of strictly positive terms, so \(c_{\mathrm{BMO}}(d) {\gt} 0\). Since \(C_{\mathrm{JN}}(d) {\gt} 0\), the denominator \(2\, C_{\mathrm{JN}}(d)\, c_{\mathrm{BMO}}(d) + 1\) is strictly greater than \(1\), hence its reciprocal lies in \((0,1)\). </p>
+
+  </div>
+</div>
+<h2 id="a0000000066">8.1.1 Logarithmic gradient bound</h2>
+<p>The first ingredient is the Caccioppoli-type inequality for \(\log u\), obtained by testing the supersolution against \(\varphi ^2/(u + \varepsilon )\). </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:log-grad-eps">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.3</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:log-grad-eps">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000621"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW01p">Definition 2.10</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:witness_add">Lemma 2.13</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:MemW1pWitness_restrict">Lemma 2.14</a></li>
+          
+          <li><a href="sec-sobolev.html#prop:witness_mul_smooth_bounded">Proposition 2.16</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:witness_smooth_cpt">Lemma 2.17</a></li>
+          
+          <li><a href="sec-sobolev.html#prop:H01_vector_space">Proposition 2.19</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:memW01p_of_smooth_cpt">Lemma 2.20</a></li>
+          
+          <li><a href="sec-sobolev.html#thm:memW01p_of_compactly_supported">Theorem 2.33</a></li>
+          
+          <li><a href="sec-functional.html#def:smoothGradNorm">Definition 3.2</a></li>
+          
+          <li><a href="sec-extension.html#thm:chain-rule-open">Theorem 4.2</a></li>
+          
+          <li><a href="sec-weakform.html#lem:EllipticCoeff_lam_nonneg">Lemma 5.3</a></li>
+          
+          <li><a href="sec-weakform.html#lem:EllipticCoeff_ae_coercive_nonneg">Lemma 5.4</a></li>
+          
+          <li><a href="sec-weakform.html#def:bilinFormIntegrandOfCoeff">Definition 5.9</a></li>
+          
+          <li><a href="sec-weakform.html#lem:aestronglyMeasurable_bilinFormIntegrandOfCoeff">Lemma 5.10</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSmoothTestOn">Definition 5.22</a></li>
+          
+          <li><a href="sec-weakform.html#def:smoothGradField">Definition 5.24</a></li>
+          
+          <li><a href="sec-weakform.html#thm:bilinForm_weighted_cauchySchwarz">Theorem 5.50</a></li>
+          
+          <li><a href="sec-weakform.html#lem:integrable_bounded_mul_bilinFormIntegrand">Lemma 5.51</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.log_gradient_bound_eps" class="lean_decl">DeGiorgi.log_gradient_bound_eps</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(\Omega \subseteq E\) be open, \(A\) an elliptic coefficient on \(\Omega \) with ellipticity constants \(\lambda , \Lambda \), \(u \in W^{1,2}_{\mathrm{loc}}(\Omega )\) positive on \(\Omega \) with \(\mathrm{IsSupersolution}A u\), and let \(\varphi \in C_c^\infty (\Omega )\). Then for every \(\varepsilon {\gt} 0\), </p>
+<div class="displaymath" id="a0000000622">
+  \begin{equation*}  \int _\Omega \frac{\varphi ^2 \, |\nabla u|^2}{(u+\varepsilon )^2}\, dx \; \leq \;  \frac{4\Lambda }{\lambda }\int _\Omega |\nabla \varphi |^2\, dx. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000621">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Set \(\psi := \varphi ^2/(u+\varepsilon )\). By the smooth chain-rule witness construction <span class="ttfamily">build_test_function_eps</span>, \(\psi \) lies in \(H^1_0(\Omega )\), \(\psi \geq 0\), and its weak gradient satisfies almost everywhere </p>
+<div class="displaymath" id="a0000000623">
+  \begin{equation*}  \nabla \psi = \frac{2\varphi \, \nabla \varphi }{u+\varepsilon } - \frac{\varphi ^2\, \nabla u}{(u+\varepsilon )^2}. \end{equation*}
+</div>
+<p> Since \(u\) is a supersolution and \(\psi \geq 0\), </p>
+<div class="displaymath" id="a0000000624">
+  \begin{equation*}  0 \; \leq \;  \int _\Omega \langle A\nabla u, \nabla \psi \rangle \, dx \; =\;  \int _\Omega \frac{2\varphi }{u+\varepsilon }\langle A\nabla u, \nabla \varphi \rangle \, dx \; -\;  \int _\Omega \frac{\varphi ^2}{(u+\varepsilon )^2} \langle A\nabla u, \nabla u\rangle \, dx. \end{equation*}
+</div>
+<p> Set </p>
+<div class="displaymath" id="a0000000625">
+  \begin{align*}  Q & := \int _\Omega \frac{\varphi ^2}{(u+\varepsilon )^2}\langle A\nabla u,\nabla u\rangle \, dx, \\ X & := \int _\Omega \frac{\varphi }{u+\varepsilon }\langle A\nabla u,\nabla \varphi \rangle \, dx. \end{align*}
+</div>
+<p> The supersolution inequality reads \(Q \leq 2X\). By Cauchy–Schwarz applied to the bilinear form \(\langle A\, \cdot ,\cdot \rangle \), </p>
+<div class="displaymath" id="a0000000626">
+  \begin{equation*}  X^2 \; \leq \;  Q \cdot \int _\Omega \langle A\nabla \varphi ,\nabla \varphi \rangle \, dx \; \leq \;  Q \cdot \Lambda \int _\Omega |\nabla \varphi |^2\, dx. \end{equation*}
+</div>
+<p> Combining \(Q \leq 2X\) with \(X^2 \leq Q\, \Lambda \int |\nabla \varphi |^2\), the elementary inequality \(Q^2 \leq 4QP\) implies \(Q \leq 4P\) where \(P := \Lambda \int _\Omega |\nabla \varphi |^2\) (see <span class="ttfamily">log_gradient_algebraic_conclusion</span>). Hence </p>
+<div class="displaymath" id="a0000000627">
+  \begin{equation*}  \lambda \int _\Omega \frac{\varphi ^2|\nabla u|^2}{(u+\varepsilon )^2}\, dx \; \leq \;  Q \; \leq \;  4\Lambda \int _\Omega |\nabla \varphi |^2\, dx, \end{equation*}
+</div>
+<p> and dividing by \(\lambda {\gt} 0\) gives the claim. </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:log-grad">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.4</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:log-grad">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000628"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#thm:log-grad-eps">Theorem 8.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.log_gradient_bound_of_supersolution" class="lean_decl">DeGiorgi.log_gradient_bound_of_supersolution</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Under the same hypotheses, with \(u {\gt} 0\) on \(\Omega \), </p>
+<div class="displaymath" id="a0000000629">
+  \begin{equation*}  \int _\Omega \frac{\varphi ^2\, |\nabla u|^2}{u^2}\, dx \; \leq \;  \frac{4\Lambda }{\lambda }\int _\Omega |\nabla \varphi |^2\, dx. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000628">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply Theorem&#160;<a href="sec-crossover.html#thm:log-grad-eps">8.3</a> with \(\varepsilon _n = 1/(n+1)\). The integrand </p>
+<div class="displaymath" id="a0000000630">
+  \begin{equation*}  g_n(x) := \varphi (x)^2|\nabla u(x)|^2/(u(x)+\varepsilon _n)^2 \end{equation*}
+</div>
+<p> increases monotonically as \(\varepsilon _n \downarrow 0\) to \(g_0(x) := \varphi (x)^2|\nabla u(x)|^2/u(x)^2\) at every point of \(\Omega \) since \(u {\gt} 0\) there. By Fatou’s lemma, </p>
+<div class="displaymath" id="a0000000631">
+  \begin{equation*}  \int _\Omega g_0\, dx \; \leq \;  \liminf _{n\to \infty }\int _\Omega g_n\, dx \; \leq \;  \frac{4\Lambda }{\lambda }\int _\Omega |\nabla \varphi |^2\, dx. \end{equation*}
+</div>
+
+  </div>
+</div>
+<h2 id="a0000000067">8.1.2 BMO control of \(\log u\)</h2>
+<p>For \(\varepsilon {\gt} 0\) define the regularized log \(v_\varepsilon (x) := -\log (u(x)+\varepsilon ) + \log \varepsilon \) and its smooth chain-rule witness \(\texttt{regularizedLogFun}\). Combining the log-gradient bound with the Poincaré inequality on \(B_{1/2}\) gives the BMO estimate. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:bmo-half">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.5</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:bmo-half">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000632"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:weak_grad_norm_memLp">Lemma 2.18</a></li>
+          
+          <li><a href="sec-sobolev.html#lem:zero_outside_tsupport">Lemma 2.22</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#thm:poincare_unitBall_W1p_public">Theorem 3.11</a></li>
+          
+          <li><a href="sec-functional.html#lem:eLpNorm_const_average_le">Lemma 3.14</a></li>
+          
+          <li><a href="sec-functional.html#def:CampanatoBall">Definition 3.38</a></li>
+          
+          <li><a href="sec-functional.html#def:HasCampanatoBound">Definition 3.39</a></li>
+          
+          <li><a href="sec-extension.html#thm:chain-rule-open">Theorem 4.2</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-extension.html#thm:Cutoff_exists">Theorem 4.7</a></li>
+          
+          <li><a href="sec-extension.html#lem:rescale-witness">Lemma 4.11</a></li>
+          
+          <li><a href="sec-extension.html#lem:eLpNorm_rescale_to_unitBall">Lemma 4.12</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#thm:log-grad-eps">Theorem 8.3</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.regularizedLog_unit_halfBall_meanOscillation" class="lean_decl">DeGiorgi.regularizedLog_unit_halfBall_meanOscillation</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(A\) be normalized elliptic on \(B_{1}\), \(u {\gt} 0\) a supersolution. Then for \(v := v_\varepsilon \), </p>
+<div class="displaymath" id="a0000000633">
+  \begin{equation*}  \mathop{⨍}\nolimits _{B_{1/2}} \Bigl|v(x) - \mathop{⨍}\nolimits _{B_{1/2}} v\Bigr|\, dx \; \leq \;  c_{\mathrm{BMO}}(d)\, \Lambda _A^{1/2}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000632">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Pick a cutoff \(\eta \in C_c^\infty (B_{3/4})\) with \(\eta = 1\) on \(B_{1/2}\), \(0 \leq \eta \leq 1\), and \(|\nabla \eta | \leq 8M_{\mathrm{st}}\) (existence given by <span class="ttfamily">Cutoff.exists</span>). Theorem&#160;<a href="sec-crossover.html#thm:log-grad-eps">8.3</a> (with \(\varphi = \eta \), \(\lambda _A = 1\)) yields </p>
+<div class="displaymath" id="a0000000634">
+  \begin{equation*}  \int _{B_{1/2}} |\nabla v_\varepsilon |^2\, dx \; \leq \;  \int _{B_{1}} \eta ^2 \frac{|\nabla u|^2}{(u+\varepsilon )^2}\, dx \; \leq \;  4\Lambda _A \int _{B_{1}}|\nabla \eta |^2\, dx \; \leq \;  4\Lambda _A \cdot (8M_{\mathrm{st}})^2 \mathrm{vol}(B_{1}). \end{equation*}
+</div>
+<p> Hence \(\| \nabla v_\varepsilon \| _{L^2(B_{1/2})} \leq 16M_{\mathrm{st}}\, \Lambda _A^{1/2}\, \mathrm{vol}(B_{1})^{1/2}\). By the Poincaré–Wirtinger inequality on \(B_{1/2}\) with constant \(C_{\mathrm{poinc}}(d) \cdot (1/2)^{1-d/2}\) (the dimensional rescaling factor), </p>
+<div class="displaymath" id="a0000000635">
+  \begin{multline*}  \mathop{⨍}\nolimits _{B_{1/2}}\Bigl|v_\varepsilon - \mathop{⨍}\nolimits _{B_{1/2}} v_\varepsilon \Bigr|\, dx \; \leq \;  \mathrm{vol}(B_{1/2})^{-1/2} C_{\mathrm{poinc}}(d) (1/2)^{1-d/2} \| \nabla v_\varepsilon \| _{L^2(B_{1/2})} \\ \; \leq \;  \mathrm{vol}(B_{1})^{-1/2}C_{\mathrm{poinc}}(d) (1/2)^{1-d/2}\cdot 8M_{\mathrm{st}}\, \Lambda _A^{1/2}\, \mathrm{vol}(B_{1})^{1/2} \; =\;  c_{\mathrm{BMO}}(d)\, \Lambda _A^{1/2}. \end{multline*}
+</div>
+
+  </div>
+</div>
+<p>The same statement holds on every ball \(B(x_0, R/2)\) with \(\overline{B(x_0,R)} \subset B_{1}\), by affine rescaling \(\texttt{rescaleToUnitBall}\) (see <span class="ttfamily">regularizedLog_ball_meanOscillation</span>). </p>
+<h2 id="a0000000068">8.1.3 John–Nirenberg exponential integrability</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:JN-constants">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.6</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:JN-constants">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossoverJNTheta" class="lean_decl">DeGiorgi.crossoverJNTheta</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossoverJNKloc" class="lean_decl">DeGiorgi.crossoverJNKloc</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossoverJNKhalf" class="lean_decl">DeGiorgi.crossoverJNKhalf</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   Set </p>
+<div class="displaymath" id="a0000000636">
+  \begin{align*}  \theta (d) & := 24 \cdot 2^{d+1} \cdot \bigl(c’(d)\, c_{\mathrm{BMO}}(d)\bigr), \\ K_{\mathrm{loc}}(d)& := \exp (\theta (d)) \cdot (1 + C_{\mathrm{JN}}(d)),\\ K_{1/2}(d) & := \lceil 97^d \rceil \cdot K_{\mathrm{loc}}(d). \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:exp-half">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.7</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:exp-half">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000637"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-functional.html#thm:john_nirenberg_local">Theorem 3.37</a></li>
+          
+          <li><a href="sec-extension.html#thm:chain-rule-open">Theorem 4.2</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-extension.html#lem:MemW1pWitness_sub_const">Lemma 4.72</a></li>
+          
+          <li><a href="sec-extension.html#thm:finite-cover-card">Theorem 4.86</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleToUnitBall">Definition 5.52</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleCoeffToUnitBall">Definition 5.54</a></li>
+          
+          <li><a href="sec-weakform.html#thm:rescaleToUnitBall_isSubsolution">Theorem 5.56</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff_restrict">Definition 5.57</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:bmo-half">Theorem 8.5</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.regularizedLog_halfBall_exp_average_to_origin_le" class="lean_decl">DeGiorgi.regularizedLog_halfBall_exp_average_to_origin_le</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   With \(p := c'(d)/\Lambda _A^{1/2}\), \(v := v_\varepsilon \), and \(a := \mathop{⨍}\nolimits _{B_{1/48}} v\, dz\), </p>
+<div class="displaymath" id="a0000000638">
+  \begin{equation*}  \mathop{⨍}\nolimits _{B_{1/2}} \exp (p\, |v(z) - a|)\, dz \; \leq \;  K_{1/2}(d). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000637">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply the local John–Nirenberg lemma at scale \(\rho = 1/48\) on a finite cover of \(B_{1/2}\) by balls \(B(x_i, 1/48)\) with \(\# \{ x_i\}  \leq \lceil 97^d\rceil \). On each cover ball, Theorem&#160;<a href="sec-crossover.html#thm:bmo-half">8.5</a> (rescaled to \(B(x_i, R)\) via <span class="ttfamily">regularizedLog_ball_meanOscillation</span>) gives \(\| v - \langle v\rangle \| _{\mathrm{BMO}} \leq c_{\mathrm{BMO}}(d)\, \Lambda _A^{1/2}\). The classical John–Nirenberg theorem \(\texttt{C\_ JN}\) then yields </p>
+<div class="displaymath" id="a0000000639">
+  \begin{equation*}  \mathop{⨍}\nolimits _{B(x_i,1/48)} \exp \bigl(p\, |v - \langle v\rangle _{B(x_i,1/48)}|\bigr)\, dz \; \leq \;  1 + C_{\mathrm{JN}}(d). \end{equation*}
+</div>
+<p> The shift between local and global averages is controlled by \(\theta (d) = 24 \cdot 2^{d+1}\, c'(d)\, c_{\mathrm{BMO}}(d)\) via the standard telescoping \(\texttt{regularizedLog\_ smallBallAverage\_ to\_ origin\_ le}\). Multiplying each local exponential bound by \(\exp (p\, \theta (d)) = \exp (\theta (d))\) (since \(p\cdot \delta = \theta (d)\) by direct computation, using \(\delta := 24\cdot 2^{d+1}\, (c_{\mathrm{BMO}}(d)\Lambda _A^{1/2})\) and \(p \cdot \Lambda _A^{1/2} = c'(d)\)), and summing over the \(\lceil 97^d\rceil \) cover balls gives the asserted bound by \(K_{1/2}(d)\). </p>
+
+  </div>
+</div>
+<h2 id="a0000000069">8.1.4 Crossover product bound</h2>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:crossover-exists">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.8</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:crossover-exists">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000640"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-sobolev.html#def:HasWeakPartialDeriv">Definition 2.1</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#thm:chain-rule-open">Theorem 4.2</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#def:JN-constants">Definition 8.6</a></li>
+          
+          <li><a href="sec-crossover.html#thm:exp-half">Theorem 8.7</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossover_product_bound_exists" class="lean_decl">DeGiorgi.crossover_product_bound_exists</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   There exists a constant \(C(d) \geq 1\) such that for every normalized elliptic \(A\) on \(B_{1}\), every positive supersolution \(u\), and \(p_0 := c'(d)/\Lambda _A^{1/2}\), </p>
+<div class="displaymath" id="a0000000641">
+  \begin{equation*}  \Bigl(\mathop{⨍}\nolimits _{B_{1/2}} u^{p_0}\, dx\Bigr)\Bigl(\mathop{⨍}\nolimits _{B_{1/2}} u^{-p_0}\, dx\Bigr) \; \leq \;  C(d). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000640">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>By a regularization step \(u \mapsto u + \varepsilon \), it suffices to bound </p>
+<div class="displaymath" id="a0000000642">
+  \begin{equation*}  J_\varepsilon := \Bigl(\mathop{⨍}\nolimits _{B_{1/2}}(u+\varepsilon )^{p_0}\Bigr) \Bigl(\mathop{⨍}\nolimits _{B_{1/2}}(u+\varepsilon )^{-p_0}\Bigr) \end{equation*}
+</div>
+<p> uniformly in \(\varepsilon {\gt} 0\) by \(K_{1/2}(d)^2\). With \(v_\varepsilon = -\log (u+\varepsilon ) + \log \varepsilon \), \(a := \mathop{⨍}\nolimits _{B_{1/48}} v_\varepsilon \), \(F_\pm (x) := \exp (\pm p_0(v_\varepsilon - a))\) and \(F_{\mathrm{abs}} := \exp (p_0|v_\varepsilon - a|)\), we have \(F_\pm \leq F_{\mathrm{abs}}\) pointwise. Theorem&#160;<a href="sec-crossover.html#thm:exp-half">8.7</a> together with \(\texttt{setAverage\_ mono\_ of\_ nonneg\_ local}\) yields </p>
+<div class="displaymath" id="a0000000643">
+  \begin{equation*}  \mathop{⨍}\nolimits _{B_{1/2}} F_+\, dx \leq K_{1/2}(d), \qquad \mathop{⨍}\nolimits _{B_{1/2}} F_-\, dx \leq K_{1/2}(d). \end{equation*}
+</div>
+<p> Now \((u+\varepsilon )^{p_0} = \exp (p_0(\log \varepsilon - a))\, F_+\) and \((u+\varepsilon )^{-p_0} = \exp (p_0(a - \log \varepsilon ))\, F_-\) pointwise on \(B_{1/2}\). The two scalar prefactors multiply to \(1\) (cancellation \(\texttt{hcancel}\)), so </p>
+<div class="displaymath" id="a0000000644">
+  \begin{equation*}  J_\varepsilon \; =\;  \Bigl(\mathop{⨍}\nolimits F_+\Bigr)\Bigl(\mathop{⨍}\nolimits F_-\Bigr) \; \leq \;  K_{1/2}(d)^2. \end{equation*}
+</div>
+<p> Letting \(\varepsilon \downarrow 0\) along \(\varepsilon _n = 1/(n+1)\), the shifted integrals converge to the original ones by dominated/monotone convergence (the integrability of \(|u|^{p_0}\) is supplied by the \(W^{1,2}\) estimate using \(p_0 {\lt} 1 \leq 2\), see <span class="ttfamily">hpow_int</span>). Choose \(C(d) := \max \{ 1, K_{1/2}(d)^2\} \). </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:Ccrossover">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.9</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:Ccrossover">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_crossover'" class="lean_decl">DeGiorgi.C_crossover'</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   \(C_{\mathrm{cross}}(d) := C(d)\) from Theorem&#160;<a href="sec-crossover.html#thm:crossover-exists">8.8</a>, so \(C_{\mathrm{cross}}(d) \geq 1\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:crossover-estimate">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.10</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:crossover-estimate">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000645"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossover_estimate" class="lean_decl">DeGiorgi.crossover_estimate</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(d \geq 3\), \(A\) normalized elliptic on \(B_{1}\), and \(u {\gt} 0\) a supersolution. Then with \(c := c'(d)/\Lambda _A^{1/2}\), </p>
+<div class="displaymath" id="a0000000646">
+  \begin{equation*}  \Bigl(\mathop{⨍}\nolimits _{B_{1/2}} u^c\, dx\Bigr)\Bigl(\mathop{⨍}\nolimits _{B_{1/2}} u^{-c}\, dx\Bigr) \; \leq \;  C_{\mathrm{cross}}(d). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000645">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Set \(v(x) := -\log u(x)\), \(v_{\mathrm{avg}} := \mathop{⨍}\nolimits _{B_{1/2}} v\, dx\), \(w(x) := \exp (c(v_{\mathrm{avg}} - v(x)))\), and \(w^{-1}(x) := \exp (c(v(x) - v_{\mathrm{avg}}))\), so \(w \cdot w^{-1} \equiv 1\). On \(B_{1/2}\) where \(u {\gt} 0\), \(u^c = e^{-c v_{\mathrm{avg}}}\, w\) and \(u^{-c} = e^{c v_{\mathrm{avg}}}\, w^{-1}\), hence </p>
+<div class="displaymath" id="a0000000647">
+  \begin{equation*}  \Bigl(\mathop{⨍}\nolimits u^c\Bigr)\Bigl(\mathop{⨍}\nolimits u^{-c}\Bigr) \; =\;  e^{-cv_{\mathrm{avg}}}e^{cv_{\mathrm{avg}}} \Bigl(\mathop{⨍}\nolimits w\Bigr)\Bigl(\mathop{⨍}\nolimits w^{-1}\Bigr) \; =\;  \Bigl(\mathop{⨍}\nolimits w\Bigr)\Bigl(\mathop{⨍}\nolimits w^{-1}\Bigr). \end{equation*}
+</div>
+<p> Apply Theorem&#160;<a href="sec-crossover.html#thm:crossover-exists">8.8</a>. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:crossover-unaveraged">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">8.11</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#cor:crossover-unaveraged">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000648"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-estimate">Theorem 8.10</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.crossover_estimate_unaveraged" class="lean_decl">DeGiorgi.crossover_estimate_unaveraged</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   Multiplying through by \(\mathrm{vol}(B_{1/2})^2 {\gt} 0\), </p>
+<div class="displaymath" id="a0000000649">
+  \begin{equation*}  \Bigl(\int _{B_{1/2}} u^c\Bigr)\Bigl(\int _{B_{1/2}} u^{-c}\Bigr) \; \leq \;  C_{\mathrm{cross}}(d)\, \mathrm{vol}(B_{1/2})^2. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000648">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  <p> See the Lean formalization. </p>
+
+  </div>
+</div>
+<h1 id="a0000000070">8.2 Weak Harnack Inequality</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:p0">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.12</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:p0">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.weakHarnackP0" class="lean_decl">DeGiorgi.weakHarnackP0</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.weak_harnack_decay_exp" class="lean_decl">DeGiorgi.weak_harnack_decay_exp</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   For a normalized elliptic \(A\) on \(B_{1}\), set </p>
+<div class="displaymath" id="a0000000650">
+  \begin{equation*}  p_0 := p_0(A) := \frac{c'(d)}{\Lambda _A^{1/2}}, \qquad \beta (d) := \frac{d\, \chi (d)}{c'(d)}, \end{equation*}
+</div>
+<p> where \(\chi (d) := d/(d-2)\) is the Sobolev exponent (<span class="ttfamily">moserChi</span>). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:p_pos">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.13</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:p_pos">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000651"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.p₀_pos" class="lean_decl">DeGiorgi.p₀_pos</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.p₀_lt_one" class="lean_decl">DeGiorgi.p₀_lt_one</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.Λ_mul_p₀_sq" class="lean_decl">DeGiorgi.Λ_mul_p₀_sq</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   \(0 {\lt} p_0(A) {\lt} 1\), \(p_0(A) \leq c'(d)\), and \(\Lambda _A\, p_0(A)^2 = c'(d)^2\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000651">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Since \(\Lambda _A \geq 1\), \(\Lambda _A^{1/2} \geq 1\), so \(0 {\lt} p_0 = c'(d)/\Lambda _A^{1/2} \leq c'(d) {\lt} 1\). The identity follows from \((c'(d)/\Lambda _A^{1/2})^2 \cdot \Lambda _A = c'(d)^2\). </p>
+
+  </div>
+</div>
+<p>The proof of the weak Harnack inequality chains three pieces at half scale. We rescale \(v(z) := u(z/2)\) from \(B_{1/2}\) to \(B_{1}\) via the rescaled coefficient \(A' := \texttt{rescaledCoeff}\, A\) which preserves \(\Lambda \). The three steps are: </p>
+<ul class="itemize">
+  <li><p><em>Forward Moser at level \(p_0\)</em> (<span class="ttfamily">weak_harnack_stage_one_forward_ball</span>): </p>
+<div class="displaymath" id="a0000000652">
+  \begin{equation*}  \Bigl(\int _{B_{1/4}} u^{q\, d/(d-2)}\Bigr)^{p_0(d-2)/(qd)} \leq C_{\mathrm{wH},0\to }(d)\, (\Lambda _A p_0^2/(1-q)^2 + 1)^{d\chi /2} \int _{B_{1/2}} u^{p_0}. \end{equation*}
+</div>
+</li>
+  <li><p><em>Crossover</em> (Corollary&#160;<a href="sec-crossover.html#cor:crossover-unaveraged">8.11</a>) at the level \(p_0\): </p>
+<div class="displaymath" id="a0000000653">
+  \begin{equation*}  \Bigl(\int _{B_{1/2}} u^{p_0}\Bigr)\Bigl(\int _{B_{1/2}} u^{-p_0}\Bigr) \leq C_{\mathrm{cross}}(d)\, \mathrm{vol}(B_{1/2})^2. \end{equation*}
+</div>
+</li>
+  <li><p><em>Inverse Moser</em> (<span class="ttfamily">weak_harnack_stage_one_inverse_ball</span>): </p>
+<div class="displaymath" id="a0000000654">
+  \begin{equation*}  (\Lambda _A p_0^2 + 1)^{-d/2}\Bigl(\int _{B_{1/2}} u^{-p_0}\Bigr)^{-1} \leq C_{\mathrm{wH},0}(d)\, \bigl(\operatorname*{ess\, inf}_{B_{1/4}} u\bigr)^{p_0}. \end{equation*}
+</div>
+</li>
+</ul>
+<p>Multiplying these three estimates yields the chain. </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:wH-chain">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.14</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:wH-chain">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000655"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleCoeffToUnitBall">Definition 5.54</a></li>
+          
+          <li><a href="sec-weakform.html#thm:rescaleToUnitBall_isSubsolution">Theorem 5.56</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff_restrict">Definition 5.57</a></li>
+          
+          <li><a href="sec-weakform.html#lem:essSup_rescale_halfBall">Lemma 5.58</a></li>
+          
+          <li><a href="sec-moser.html#def:C_MoserAnchor">Definition 7.1</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#thm:preMoser-fwd">Theorem 7.26</a></li>
+          
+          <li><a href="sec-moser.html#thm:wH-stage1-inv">Theorem 7.32</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-moser.html#thm:wH-stage1-fwd">Theorem 7.38</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#cor:crossover-unaveraged">Corollary 8.11</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#lem:p_pos">Lemma 8.13</a></li>
+          
+          <li><a href="sec-crossover.html#lem:meas-bd">Lemma 8.20</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.weak_harnack_chain" class="lean_decl">DeGiorgi.weak_harnack_chain</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For \(d \geq 3\), \(A\) normalized on \(B_{1}\), \(u {\gt} 0\) a supersolution, and \(0 {\lt} q {\lt} 1\): </p>
+<div class="displaymath" id="a0000000656">
+  \begin{equation*}  \Bigl(\int _{B_{1/4}} u^{q d/(d-2)}\, dx\Bigr)^{p_0(d-2)/(qd)} \leq \frac{C_{\mathrm{chain}}(d)}{(1-q)^{d\chi (d)}} \Bigl(\operatorname*{ess\, inf}_{B_{1/4}} u\Bigr)^{p_0}. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000655">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>We split into the case \(p_0 {\lt} q\) (the natural case) and the case \(q \leq p_0\) (handled by interpolating with \(q' := (p_0+1)/2\)). Assume \(p_0 {\lt} q\) first. </p>
+<p>By regularization \(u \mapsto u + \delta \) (which preserves the supersolution property by <span class="ttfamily">isSupersolution_add_const_unitBall</span>), and using the identity \(\Lambda _A p_0^2 = c'(d)^2\), the product of the forward Moser estimate, the crossover bound and the inverse Moser estimate gives </p>
+<div class="displaymath" id="a0000000657">
+  \begin{multline*}  \Bigl(\int _{B_{1/4}}(u+\delta )^{q d/(d-2)}\Bigr)^{p_0(d-2)/(q d)} \times \bigl(c’(d)^2 + 1\bigr)^{d/2} \\[-2pt] \leq C_{\mathrm{wH},0\to }\, C_{\mathrm{wH},0}\, C_{\mathrm{cross}}\,  \mathrm{vol}(B_{1/2})^2\, (c’(d)^2/(1-q)^2 + 1)^{d\chi /2} \bigl(\operatorname*{ess\, inf}_{B_{1/4}}(u+\delta )\bigr)^{p_0}. \end{multline*}
+</div>
+<p> By <span class="ttfamily">weak_harnack_forward_factor_bound</span> the right factor is absorbed into \((1-q)^{-d\chi }\) times a dimensional constant, so collecting terms produces a constant \(C_{\mathrm{chainMain}}(d)\) with </p>
+<div class="displaymath" id="a0000000658">
+  \begin{equation*}  \Bigl(\int _{B_{1/4}} (u+\delta )^{qd/(d-2)}\Bigr)^{p_0(d-2)/(qd)} \; \leq \;  \frac{C_{\mathrm{chainMain}}(d)}{(1-q)^{d\chi (d)}} \bigl(\operatorname*{ess\, inf}_{B_{1/4}}(u+\delta )\bigr)^{p_0}. \end{equation*}
+</div>
+<p> Letting \(\delta = 1/(n+1) \downarrow 0\) and using the dominated/monotone convergence theorems on each side concludes the case \(p_0 {\lt} q\). </p>
+<p>For \(q \leq p_0\) pick \(q' := (p_0+1)/2 \in (p_0,1)\) and apply the previous case with \(q'\). Since \(q d/(d-2) \leq q' d/(d-2)\), monotonicity of \(L^p\) norms on \(B_{1/4}\) (<span class="ttfamily">quarterBall_lpNorm_mono</span>) raises the resulting \(L^{q' d/(d-2)}\) norm to dominate the \(L^{q d/(d-2)}\) norm, and a uniform bound \(C_{\mathrm{chainMain}}/(1-q')^{d\chi } \leq C_{\mathrm{chain}}/(1-q)^{d\chi }\) <span class="ttfamily">(hmain_to_public)</span> then yields the claim. </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:CwH">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.15</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:CwH">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_weakHarnack" class="lean_decl">DeGiorgi.C_weakHarnack</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>   \( C_{wH}(d) \; :=\;  C_{\mathrm{chain}}(d)^{1/c'(d)}. \) By Lemma&#160;<a href="sec-crossover.html#lem:c-crossover-bounds">8.2</a> and \(C_{\mathrm{chain}} \geq 1\), we have \(C_{wH}(d) \geq 1\) (<span class="ttfamily">one_le_C_weakHarnack</span>). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:wH">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.16</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:wH">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000659"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#lem:p_pos">Lemma 8.13</a></li>
+          
+          <li><a href="sec-crossover.html#thm:wH-chain">Theorem 8.14</a></li>
+          
+          <li><a href="sec-crossover.html#lem:meas-bd">Lemma 8.20</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.weak_harnack" class="lean_decl">DeGiorgi.weak_harnack</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   For \(d \geq 3\), \(A\) normalized elliptic on \(B_{1}\), \(u {\gt} 0\) a supersolution, and \(0 {\lt} q {\lt} 1\): </p>
+<div class="displaymath" id="a0000000660">
+  \begin{equation*}  \Bigl(\int _{B_{1/4}} u^{q d/(d-2)}\, dx\Bigr)^{(d-2)/(qd)} \leq \Bigl(\frac{C_{wH}(d)}{(1-q)^{\beta (d)}}\Bigr)^{\Lambda _A^{1/2}} \operatorname*{ess\, inf}_{B_{1/4}} u. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000659">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>By Theorem&#160;<a href="sec-crossover.html#thm:wH-chain">8.14</a>, \(I^\alpha \leq C_{\mathrm{chain}}(d)/(1-q)^{d\chi }\cdot (\operatorname*{ess\, inf}u)^{p_0}\) where \(I := \int _{B_{1/4}} u^{qd/(d-2)}\) and \(\alpha := p_0(d-2)/(qd)\). Raising both sides to the \(1/p_0\) power (<span class="ttfamily">rpow_le_rpow_of_exponent</span>): </p>
+<div class="displaymath" id="a0000000661">
+  \begin{equation*}  I^{(d-2)/(qd)} \; \leq \;  \Bigl(\frac{C_{\mathrm{chain}}(d)}{(1-q)^{d\chi (d)}}\Bigr)^{1/p_0} \operatorname*{ess\, inf}_{B_{1/4}} u. \end{equation*}
+</div>
+<p> Now use \(1/p_0 = \Lambda _A^{1/2}/c'(d)\) and the laws of real powers: </p>
+<div class="displaymath" id="a0000000662">
+  \begin{align*}  \Bigl(\frac{C_{\mathrm{chain}}(d)}{(1-q)^{d\chi (d)}}\Bigr)^{1/p_0} & = \Bigl(\bigl(C_{\mathrm{chain}}(d)/(1-q)^{d\chi (d)}\bigr)^{1/c'(d)}\Bigr)^{\Lambda _A^{1/2}}\\ & = \Bigl(C_{\mathrm{chain}}(d)^{1/c'(d)}\big/(1-q)^{d\chi (d)/c'(d)}\Bigr)^{\Lambda _A^{1/2}}\\ & = \Bigl(C_{wH}(d)\big/(1-q)^{\beta (d)}\Bigr)^{\Lambda _A^{1/2}}. \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:wH-on-ball">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.17</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:wH-on-ball">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000663"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleToUnitBall">Definition 5.52</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleCoeffToUnitBall">Definition 5.54</a></li>
+          
+          <li><a href="sec-weakform.html#thm:rescaleToUnitBall_isSubsolution">Theorem 5.56</a></li>
+          
+          <li><a href="sec-crossover.html#thm:wH">Theorem 8.16</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.weak_harnack_on_ball" class="lean_decl">DeGiorgi.weak_harnack_on_ball</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   On a general ball \(B_{R}(x_0)\) with \(R {\gt} 0\), the weak Harnack inequality takes the form </p>
+<div class="displaymath" id="a0000000664">
+  \begin{multline*}  \Bigl(R^{-d}\int _{B_{R/4}(x_0)} u^{qd/(d-2)}\, dx\Bigr)^{(d-2)/(qd)}\\ \leq \Bigl(\frac{C_{wH}(d)}{(1-q)^{\beta (d)}}\Bigr)^{\Lambda _A^{1/2}} \operatorname*{ess\, inf}_{z \in B_{1/4}}\,  u(x_0 + R z). \end{multline*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000663">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Apply Theorem&#160;<a href="sec-crossover.html#thm:wH">8.16</a> to the rescaled function \(u_R(z) := u(x_0 + R z)\) on \(B_{1}\) with the rescaled coefficients \(A_R := \texttt{rescaleNormalizedCoeffToUnitBall}\, A\), which preserves \(\Lambda \) (so \(p_0(A_R) = p_0(A)\)). The change of variables \(\texttt{crossover\_ integral\_ comp\_ affine\_ ball}\) yields the \(R^{-d}\) Jacobian factor on the left, while the essential infimum of \(u_R\) on \(B_{1/4}\) equals that of \(u\) on \(B_{R/4}(x_0)\) pulled back through the affine map. </p>
+
+  </div>
+</div>
+<h2 id="a0000000071">8.2.1 Support constants</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:local-bases">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.18</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:local-bases">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.localMoserBase" class="lean_decl">DeGiorgi.localMoserBase</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.localWeakHarnackBase" class="lean_decl">DeGiorgi.localWeakHarnackBase</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  
+<div class="displaymath" id="a0000000665">
+  \begin{align*}  M_{\mathrm{loc}}(d) & := C_{\mathrm{Moser}}(d)\, ((d-1))^d\, 4^d, \\ W_{\mathrm{loc}}(d) & := C_{wH,0}(d)\,  d^{\beta (d)}. \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:one_le_localMoserBase">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.19</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:one_le_localMoserBase">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000666"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-crossover.html#def:local-bases">Definition 8.18</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.one_le_localMoserBase" class="lean_decl">DeGiorgi.one_le_localMoserBase</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.one_le_localWeakHarnackBase" class="lean_decl">DeGiorgi.one_le_localWeakHarnackBase</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   For \(d \geq 3\), \(1 \leq M_{\mathrm{loc}}(d)\) and \(1 \leq W_{\mathrm{loc}}(d)\). Both are strictly positive. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000666">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Each is a product of factors \(\geq 1\): \(C_{\mathrm{Moser}}(d) \geq 1\), \((d-1)^d \geq 1\) (since \(d-1 \geq 2\)), \(4^d \geq 1\), \(C_{wH,0} \geq 1\), \(d^{\beta (d)} \geq 1\) (since \(d \geq 1\) and \(\beta (d) \geq 0\) by <span class="ttfamily">weak_harnack_decay_exp_nonneg</span>). </p>
+
+  </div>
+</div>
+<h2 id="a0000000072">8.2.2 Measure-bound utilities</h2>
+<p>The Harnack and Holder layers also use a small toolkit of \(\operatorname*{ess\, sup}/\operatorname*{ess\, inf}\) arithmetic on restricted ball measures (<span class="ttfamily">Support/MeasureBounds.lean</span>). </p>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:meas-bd">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.20</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:meas-bd">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000667"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.le_essInf_real_of_ae_le" class="lean_decl">DeGiorgi.le_essInf_real_of_ae_le</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.essSup_le_of_ae_bdd" class="lean_decl">DeGiorgi.essSup_le_of_ae_bdd</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.essInf_add_const_of_bdd" class="lean_decl">DeGiorgi.essInf_add_const_of_bdd</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.essSup_neg_of_bdd" class="lean_decl">DeGiorgi.essSup_neg_of_bdd</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  Let \(\mu \) be a non-zero (Borel) measure on \(E\) and \(u : E \to \mathbb {R}\). </p>
+<ol class="enumerate">
+  <li><p>If \(u \geq c\) \(\mu \)-a.e., then \(c \leq \operatorname*{ess\, inf}_\mu u\). </p>
+</li>
+  <li><p>If \(K \leq u \leq C\) \(\mu \)-a.e., then \(\operatorname*{ess\, inf}_\mu u, \operatorname*{ess\, sup}_\mu u \in [K,C]\). </p>
+</li>
+  <li><p>If \(u\) is bounded \(\mu \)-a.e., then \(\operatorname*{ess\, inf}_\mu (u+c) = \operatorname*{ess\, inf}_\mu u + c\) and the symmetric statement for \(\operatorname*{ess\, sup}\). </p>
+</li>
+  <li><p>\(\operatorname*{ess\, sup}_\mu (-u) = -\operatorname*{ess\, inf}_\mu u\) when \(u\) is bounded. </p>
+</li>
+  <li><p>For a measurable embedding \(T : E\to E\) and measurable \(g\), \(\operatorname*{ess\, inf}_\mu (g\circ T) = \operatorname*{ess\, inf}_{T_*\mu } g\) <span class="ttfamily">(essInf_comp_measurableEmbedding_eq)</span>. </p>
+</li>
+  <li><p>For \(c \in \mathrm{ENNReal}\setminus \{ 0\} \), \(\operatorname*{ess\, inf}_{c\cdot \mu }f = \operatorname*{ess\, inf}_\mu f\). </p>
+</li>
+</ol>
+<p> Furthermore, \(\mathrm{vol}(B_{r}(c))\neq 0\) for \(r {\gt} 0\), so the restriction \(\mathrm{vol}|_{B_{r}(c)}\) is non-zero <span class="ttfamily">(restrict_ball_ne_zero)</span>. </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000667">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Each statement is a direct unfolding of \(\operatorname*{ess\, inf}\)/\(\operatorname*{ess\, sup}\) as a \(\mathrm{sSup}\)/\(\mathrm{sInf}\) over levels at which the corresponding sublevel set has positive/full measure. For instance, in (1): assume \(\mu \neq 0\) and \(\mu (\{ u {\lt} c\} ) = 0\). Then \(\{ u {\lt} a\} \) has measure zero for every \(a {\lt} c\), so \(a\) is dominated by every upper bound used in the definition of \(\operatorname*{ess\, inf}_\mu u\), hence \(c \leq \operatorname*{ess\, inf}_\mu u\). Statements (3),(4) follow from the corresponding \(\liminf /\limsup \) arithmetic on the filter \(\ae \mu \) together with the fact that the functions are eventually bounded. Statements (5),(6) follow from the change-of-variables and scaling formulas for the underlying \(\mathrm{sSup}/\mathrm{sInf}\) over level sets. </p>
+
+  </div>
+</div>
+<h1 id="a0000000073">8.3 Harnack Inequality and Holder Regularity</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:Charnack">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.21</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:Charnack">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_harnack" class="lean_decl">DeGiorgi.C_harnack</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  
+<div class="displaymath" id="a0000000668">
+  \begin{equation*}  C_{\mathrm{Har}}(d) := 17\Bigl(\frac{d-2}{d-1}\, \log \bigl(C_{\mathrm{Moser}}(d)\, (d-1)^d\, 4^d\bigr) + d + \log \bigl(C_{wH,0}(d)\, d^{\beta (d)}\bigr)\Bigr). \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:C_harnack_nonneg">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.22</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:C_harnack_nonneg">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000669"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-crossover.html#def:local-bases">Definition 8.18</a></li>
+          
+          <li><a href="sec-crossover.html#lem:one_le_localMoserBase">Lemma 8.19</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_harnack_nonneg" class="lean_decl">DeGiorgi.C_harnack_nonneg</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   For \(d \geq 3\), \(0 \leq C_{\mathrm{Har}}(d)\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000669">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>\((d-2)/(d-1) \geq 0\), both logs are nonnegative since \(M_{\mathrm{loc}}(d) \geq 1\) and \(W_{\mathrm{loc}}(d) \geq 1\), and \(d \geq 0\). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:harnack">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.23</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:harnack">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000670"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-extension.html#thm:ae_on_set_of_ae_on_finite_cover">Theorem 4.88</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff">Definition 5.1</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleToUnitBall">Definition 5.52</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleCoeffToUnitBall">Definition 5.54</a></li>
+          
+          <li><a href="sec-weakform.html#thm:rescaleToUnitBall_isSubsolution">Theorem 5.56</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff_restrict">Definition 5.57</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#thm:linfty-Moser">Theorem 7.20</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#def:p0">Definition 8.12</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-crossover.html#thm:wH-on-ball">Theorem 8.17</a></li>
+          
+          <li><a href="sec-crossover.html#def:local-bases">Definition 8.18</a></li>
+          
+          <li><a href="sec-crossover.html#lem:one_le_localMoserBase">Lemma 8.19</a></li>
+          
+          <li><a href="sec-crossover.html#lem:meas-bd">Lemma 8.20</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.harnack" class="lean_decl">DeGiorgi.harnack</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(d \geq 3\), \(A\) normalized elliptic on \(B_{1}\), and \(u {\gt} 0\) a (local weak) solution of \(-\operatorname{div}(A\nabla u) = 0\) on \(B_{1}\). Then </p>
+<div class="displaymath" id="a0000000671">
+  \begin{equation*}  \operatorname*{ess\, sup}_{B_{1/2}} u \; \leq \;  \exp \bigl(C_{\mathrm{Har}}(d)\, \Lambda _A^{1/2}\bigr) \operatorname*{ess\, inf}_{B_{1/2}} u. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000670">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Define </p>
+<div class="displaymath" id="a0000000672">
+  \begin{equation*}  K(A) := \bigl(M_{\mathrm{loc}}(d)\Lambda _A^{d/2}\bigr)^{1/p_{\mathrm{Har}}(d)} \cdot W_{\mathrm{loc}}(d)^{\Lambda _A^{1/2}}, \end{equation*}
+</div>
+<p> where \(p_{\mathrm{Har}}(d) = (d-1)/(d-2) \cdot \) stuff (the auxiliary exponent <span class="ttfamily">harnack_p</span>). The forward Moser estimate gives, on each ball \(B_{1/16}(c)\) centred at \(c \in B_{1/2}(0)\), </p>
+<div class="displaymath" id="a0000000673">
+  \begin{equation*}  \operatorname*{ess\, sup}_{B_{1/16}(c)} u \; \leq \;  \bigl(M_{\mathrm{loc}}(d)\Lambda _A^{d/2}\bigr)^{1/p_{\mathrm{Har}}(d)} \cdot \Bigl(\mathop{⨍}\nolimits _{B_{1/8}(c)} u^{p_{\mathrm{Har}}(d)}\Bigr)^{1/p_{\mathrm{Har}}(d)}, \end{equation*}
+</div>
+<p> and Theorem&#160;<a href="sec-crossover.html#thm:wH-on-ball">8.17</a> (weak Harnack on \(B_{1/8}(c)\)) gives </p>
+<div class="displaymath" id="a0000000674">
+  \begin{equation*}  \Bigl(\mathop{⨍}\nolimits _{B_{1/8}(c)} u^{p_{\mathrm{Har}}(d)}\Bigr)^{1/p_{\mathrm{Har}}(d)} \; \leq \;  W_{\mathrm{loc}}(d)^{\Lambda _A^{1/2}}\,  \operatorname*{ess\, inf}_{B_{1/16}(c)} u. \end{equation*}
+</div>
+<p> Concatenating gives the local pointwise (a.e.) bound \(u(x) \leq K(A)\, \operatorname*{ess\, inf}_{B_{1/8}(c)} u\) for almost every \(x \in B_{1/16}(c)\) (<span class="ttfamily">ae_le_localHarnack_on_eighthBall</span>). </p>
+<p>By compactness of \(\overline{B_{1/2}}\), there is a finite cover of \(\overline{B_{1/2}}\) by balls \(B_{1/16}(c_i)\) with \(c_i = (15/16) x_i\), \(x_i \in \overline{B_{1/2}}\). Chaining at most \(16\) such local Harnack inequalities along a path connecting any two centres (<span class="ttfamily">quarterBallInf_chain_le</span>) yields, almost everywhere on \(B_{1/2}\), </p>
+<div class="displaymath" id="a0000000675">
+  \begin{equation*}  u(x) \; \leq \;  K(A)^{17}\, \operatorname*{ess\, inf}_{B_{1/2}} u. \end{equation*}
+</div>
+<p> Hence \(\operatorname*{ess\, sup}_{B_{1/2}} u \leq K(A)^{17}\, \operatorname*{ess\, inf}_{B_{1/2}} u\). </p>
+<p>Finally, the elementary identity </p>
+<div class="displaymath" id="a0000000676">
+  \begin{equation*}  17\Bigl[\frac{d-2}{d-1}\log M_{\mathrm{loc}}(d) + \frac{d}{2}\log \Lambda _A + \log W_{\mathrm{loc}}(d) \Lambda _A^{1/2}\Bigr] \; \leq \;  C_{\mathrm{Har}}(d)\, \Lambda _A^{1/2} \end{equation*}
+</div>
+<p> (using \(\Lambda _A^{1/2} \geq 1\) and \(\log \Lambda _A \leq 2\Lambda _A^{1/2}\), established in <span class="ttfamily">localHarnackConstant_pow_seventeen_le_exp</span>) gives \(K(A)^{17} \leq \exp (C_{\mathrm{Har}}(d)\, \Lambda _A^{1/2})\), completing the proof. </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:harnack_of_homogeneousWeakSolution">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">8.24</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#cor:harnack_of_homogeneousWeakSolution">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000677"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsHomogeneousWeakSolution">Definition 5.38</a></li>
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+          <li><a href="sec-weakform.html#lem:isHomogeneousWeakSolution_isSubsolution">Lemma 5.39</a></li>
+          
+          <li><a href="sec-crossover.html#thm:harnack">Theorem 8.23</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.harnack_of_homogeneousWeakSolution" class="lean_decl">DeGiorgi.harnack_of_homogeneousWeakSolution</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   The same conclusion holds for any positive homogeneous weak solution \(u\) on \(B_{1}\), since such a \(u\) is in particular an \(\mathrm{IsSolution}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000677">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  <p> See the Lean formalization. </p>
+
+  </div>
+</div>
+<h2 id="a0000000074">8.3.1 Holder regularity</h2>
+<div class="definition_thmwrapper theorem-style-definition" id="def:CholderMoser">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">8.25</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#def:CholderMoser">#</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.C_holder_Moser" class="lean_decl">DeGiorgi.C_holder_Moser</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.moserDecayAlpha" class="lean_decl">DeGiorgi.moserDecayAlpha</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  
+<div class="displaymath" id="a0000000678">
+  \begin{align*}  C_{\mathrm{Hol}}(d) & := 256\bigl(|C_{\mathrm{Har}}(d)| + M_{\mathrm{loc}}(d) + C_{\mathrm{Moser}}(d) 2^d + C_{wH,0}(d) d^d + 8\bigr), \\ \alpha (A) & := \exp \bigl(-(C_{\mathrm{Har}}(d)\, \Lambda _A^{1/2})\bigr). \end{align*}
+</div>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:moserDecayAlpha_pos">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.26</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:moserDecayAlpha_pos">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000679"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-crossover.html#def:CholderMoser">Definition 8.25</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-crossover.html#def:local-bases">Definition 8.18</a></li>
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+          <li><a href="sec-crossover.html#lem:C_harnack_nonneg">Lemma 8.22</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.moserDecayAlpha_pos" class="lean_decl">DeGiorgi.moserDecayAlpha_pos</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.moserDecayAlpha_le_one" class="lean_decl">DeGiorgi.moserDecayAlpha_le_one</a></li>
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.moserLowerBound_le_decayAlpha" class="lean_decl">DeGiorgi.moserLowerBound_le_decayAlpha</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   \(0 {\lt} \alpha (A) \leq 1\), and \(\exp (-(C_{\mathrm{Hol}}(d)\, \Lambda _A^{1/2})) \leq \alpha (A)\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000679">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>\(\alpha (A) {\gt} 0\) as the exponential of a real, \(\alpha (A) \leq 1\) since the exponent is \(\leq 0\) (because \(C_{\mathrm{Har}} \geq 0\)), and the lower bound is the monotonicity of \(\exp \) together with \(C_{\mathrm{Har}}(d) \leq C_{\mathrm{Hol}}(d)\) (<span class="ttfamily">C_harnack_le_C_holder_Moser</span>). </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:one_sub_moserDecayAlpha_le_two_rpow_neg">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">8.27</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#lem:one_sub_moserDecayAlpha_le_two_rpow_neg">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000680"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-crossover.html#def:CholderMoser">Definition 8.25</a></li>
+          
+          <li><a href="sec-crossover.html#lem:moserDecayAlpha_pos">Lemma 8.26</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.one_sub_moserDecayAlpha_le_two_rpow_neg" class="lean_decl">DeGiorgi.one_sub_moserDecayAlpha_le_two_rpow_neg</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>   \(1 - \alpha (A) \leq (1/2)^{\alpha (A)}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000680">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Set \(\alpha = \alpha (A) \in (0,1]\). We have \(1 - \alpha \leq e^{-\alpha }\) (by \(1+x \leq e^x\) at \(x = -\alpha \)), and \(-\alpha \leq -\alpha \log 2\) since \(\log 2 \leq 1\). Hence \(e^{-\alpha } \leq e^{-\alpha \log 2} = (1/2)^\alpha \). </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:holder-Moser">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">8.28</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#thm:holder-Moser">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000681"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsSubsolution">Definition 5.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:CholderMoser">Definition 8.25</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1p">Definition 2.8</a></li>
+          
+          <li><a href="sec-sobolev.html#def:MemW1pWitness">Definition 2.9</a></li>
+          
+          <li><a href="sec-functional.html#def:C_poinc_val">Definition 3.1</a></li>
+          
+          <li><a href="sec-functional.html#def:C_JN">Definition 3.27</a></li>
+          
+          <li><a href="sec-functional.html#def:dyadicBallAverage">Definition 3.40</a></li>
+          
+          <li><a href="sec-extension.html#lem:smoothTransition_nnnorm_deriv_bounded">Lemma 4.4</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleToUnitBall">Definition 5.52</a></li>
+          
+          <li><a href="sec-weakform.html#def:rescaleCoeffToUnitBall">Definition 5.54</a></li>
+          
+          <li><a href="sec-weakform.html#thm:rescaleToUnitBall_isSubsolution">Theorem 5.56</a></li>
+          
+          <li><a href="sec-weakform.html#def:EllipticCoeff_restrict">Definition 5.57</a></li>
+          
+          <li><a href="sec-weakform.html#lem:essSup_rescale_halfBall">Lemma 5.58</a></li>
+          
+          <li><a href="sec-moser.html#def:moserChi">Definition 7.3</a></li>
+          
+          <li><a href="sec-moser.html#lem:moserDecayRatio_nonneg">Lemma 7.4</a></li>
+          
+          <li><a href="sec-moser.html#def:C_Moser">Definition 7.5</a></li>
+          
+          <li><a href="sec-moser.html#lem:C_MoserAnchor_le_C_Moser">Lemma 7.6</a></li>
+          
+          <li><a href="sec-moser.html#thm:linfty-Moser">Theorem 7.20</a></li>
+          
+          <li><a href="sec-moser.html#def:C_weakHarnack0Forward">Definition 7.37</a></li>
+          
+          <li><a href="sec-crossover.html#def:c_crossover_bmo_scale">Definition 8.1</a></li>
+          
+          <li><a href="sec-crossover.html#lem:c-crossover-bounds">Lemma 8.2</a></li>
+          
+          <li><a href="sec-crossover.html#thm:crossover-exists">Theorem 8.8</a></li>
+          
+          <li><a href="sec-crossover.html#def:Ccrossover">Definition 8.9</a></li>
+          
+          <li><a href="sec-crossover.html#def:CwH">Definition 8.15</a></li>
+          
+          <li><a href="sec-crossover.html#def:local-bases">Definition 8.18</a></li>
+          
+          <li><a href="sec-crossover.html#lem:meas-bd">Lemma 8.20</a></li>
+          
+          <li><a href="sec-crossover.html#def:Charnack">Definition 8.21</a></li>
+          
+          <li><a href="sec-crossover.html#lem:C_harnack_nonneg">Lemma 8.22</a></li>
+          
+          <li><a href="sec-crossover.html#thm:harnack">Theorem 8.23</a></li>
+          
+          <li><a href="sec-crossover.html#lem:moserDecayAlpha_pos">Lemma 8.26</a></li>
+          
+          <li><a href="sec-crossover.html#lem:one_sub_moserDecayAlpha_le_two_rpow_neg">Lemma 8.27</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.holder_Moser" class="lean_decl">DeGiorgi.holder_Moser</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>   Let \(d \geq 3\), \(A\) normalized elliptic on \(B_{1}\), \(p_0 {\gt} 1\), and \(u\) a solution of \(-\operatorname{div}(A\nabla u) = 0\) with \(|u|^{p_0} \in L^{1}(B_{1})\). Then there exists a representative \(v\) of \(u\) on \(B_{1}\) (i.e. \(v = u\) almost everywhere on \(B_{1}\)) and an exponent \(\alpha = \alpha (A) {\gt} 0\) with \(\exp (-(C_{\mathrm{Hol}}(d)\, \Lambda _A^{1/2})) \leq \alpha \) such that for every \(x, y \in B_{1/2}\), </p>
+<div class="displaymath" id="a0000000682">
+  \begin{equation*}  |v(x) - v(y)| \; \leq \;  C_{\mathrm{Hol}}(d)\, \Lambda _A^{d/(2p_0)} \Bigl(\frac{p_0}{p_0 - 1}\Bigr)^{d/p_0} \Bigl(\int _{B_{1}} |u|^{p_0}\, dz\Bigr)^{1/p_0} \, \| x - y\| ^{\alpha }. \end{equation*}
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000681">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  
+<p>Define \(\alpha := \alpha (A)\) and let \(v := \texttt{moserRepresentative}\, u\) be the dyadic-average representative supplied by <span class="ttfamily">Holder/Representative.lean</span>. By <span class="ttfamily">moserRepresentative_ae_eq</span>, \(v = u\) almost everywhere on \(B_{1}\). </p>
+<p>Fix \(x, y \in B_{1/2}\). If \(x = y\) the bound is trivial. Otherwise, distinguish two cases. </p>
+<p><em>Large distance.</em> If \(\| x - y\|  \geq 1/8\), by <span class="ttfamily">moserRepresentative_large_distance_bound</span> there is a direct control by the \(L^{p_0}\) norm of \(u\): </p>
+<div class="displaymath" id="a0000000683">
+  \begin{equation*}  |v(x) - v(y)| \; \leq \;  C_{\mathrm{Hol}}(d)\, \Lambda _A^{d/(2p_0)} \bigl(p_0/(p_0-1)\bigr)^{d/p_0}\, \| u\| _{L^{p_0}(B_{1})}. \end{equation*}
+</div>
+<p> Since \(\| x-y\| ^\alpha \geq (1/8)^\alpha \geq 1/8\) and absorbing constants into \(C_{\mathrm{Hol}}\) via the factor \(256\) in Definition&#160;<a href="sec-crossover.html#def:CholderMoser">8.25</a> gives the claim. </p>
+<p><em>Small distance.</em> If \(\| x - y\|  {\lt} 1/8\), choose \(n\) with \(2^{-(n+1)} \leq \| x - y\|  {\lt} 2^{-n}\) <span class="ttfamily">(exists_moserDyadicRadius_near)</span>, and apply the dyadic oscillation decay <span class="ttfamily">moser_oscillation_decay_on_ball</span>, which iterates the Harnack inequality on each ball \(B_{2^{-k}}(c)\) centred near \(x\): </p>
+<div class="displaymath" id="a0000000684">
+  \begin{equation*}  \operatorname{osc}_{B_{2^{-k-1}}(c)} u \; \leq \;  (1 - \alpha )\, \operatorname{osc}_{B_{2^{-k}}(c)} u. \end{equation*}
+</div>
+<p> Iterating gives geometric decay \(\operatorname{osc}_{B_{2^{-n}}(c)} u \leq (1-\alpha )^n\, \operatorname{osc}_{B_{1}(0)} u\). By the previous lemma \(1 - \alpha \leq (1/2)^\alpha \), hence \((1-\alpha )^n \leq 2^{-\alpha n} \leq C\, \| x - y\| ^\alpha \). </p>
+<p>The starting oscillation \(\operatorname{osc}_{B_{1}} u\) is controlled by twice the local \(L^\infty \) bound, which by the forward Moser estimate <span class="ttfamily">linfty_subsolution_Moser_on_ball</span> is bounded by \(M_{\mathrm{loc}}(d)\Lambda _A^{d/(2p_0)} (p_0/(p_0-1))^{d/p_0} \| u\| _{L^{p_0}(B_{1})}\). This yields the desired pointwise Holder bound on the representative \(v\). </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:holder_Moser_of_homogeneousWeakSolution">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">8.29</span>
+    <div class="thm_header_extras">
+
+    
+    ✓
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#cor:holder_Moser_of_homogeneousWeakSolution">#</a>
+    
+    <a class="icon proof" href="sec-crossover.html#a0000000685"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    <button class="modal"><svg  class="icon icon-mindmap "><use xlink:href="symbol-defs.svg#icon-mindmap"></use></svg>
+</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Uses</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="sec-weakform.html#def:ellipticityRatio">Definition 5.2</a></li>
+          
+          <li><a href="sec-weakform.html#def:IsHomogeneousWeakSolution">Definition 5.38</a></li>
+          
+          <li><a href="sec-crossover.html#def:CholderMoser">Definition 8.25</a></li>
+          
+          <li><a href="sec-weakform.html#lem:isHomogeneousWeakSolution_isSubsolution">Lemma 5.39</a></li>
+          
+          <li><a href="sec-crossover.html#thm:holder-Moser">Theorem 8.28</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+    
+    <button class="modal lean">L∃∀N</button>
+        <div class="modal-container">
+      <div class="modal-content">
+        <header>
+          <h1>Lean declarations</h1>
+          <button class="closebtn"><svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        </header>
+        
+        <ul class="uses">
+          
+          <li><a href="https://ouboub.github.io/DeGiorgi-ub/docs/find/#doc/DeGiorgi.holder_Moser_of_homogeneousWeakSolution" class="lean_decl">DeGiorgi.holder_Moser_of_homogeneousWeakSolution</a></li>
+          
+        </ul>
+    
+      </div>
+    </div>
+
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p>   The same conclusion holds verbatim for homogeneous weak solutions (\(\mathrm{IsHomogeneousWeakSolution}\)), since these satisfy \(\mathrm{IsSolution}\). </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000685">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    Proof
+    </span>
+    <span class="expand-proof">▼</span>
+  </div>
+  <div class="proof_content">
+  <p> See the Lean formalization. </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000686">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">8.30</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sec-crossover.html#a0000000686">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>The dependence on the ellipticity bound \(\Lambda _A\) enters Holder regularity in two ways: through the multiplicative prefactor \(\Lambda _A^{d/(2p_0)}\) inherited from the forward Moser bound, and through the Holder exponent \(\alpha (A) = \exp (-C_{\mathrm{Har}}(d)\, \Lambda _A^{1/2})\) inherited from the Harnack constant. As \(\Lambda _A \to \infty \), \(\alpha (A) \to 0\) exponentially, quantifying the well-known degeneration of De Giorgi–Nash–Moser regularity for highly anisotropic elliptic operators. </p>
+
+  </div>
+</div>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <a href="sec-moser.html" title="Moser Iteration and Supersolution Estimates"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="De Giorgi–Nash–Moser theory in Lean: blueprint"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+</body>
+</html>
