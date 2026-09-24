@@ -42,9 +42,15 @@ jobs:
           lint: false
           mk_all-check: false
 
-      # Builds doc-gen4 API docs, the blueprint (web + pdf), runs checkdecls
-      # on every \lean{...} name, and deploys everything to GitHub Pages.
-      - name: Compile blueprint and documentation
+      # Builds the blueprint (web + pdf), runs checkdecls on every \lean{...}
+      # name, and deploys the docs/ folder to GitHub Pages.
+      # API docs are switched off: doc-gen4 documents all of Mathlib, which
+      # exceeds the 6-hour limit of GitHub's free runners. Instead, the Lean
+      # links go to docs/find/index.html (made by
+      # blueprint/scripts/make_source_links.py), which jumps to the source line.
+      - name: Compile blueprint
         uses: leanprover-community/docgen-action@deed0cdc44dd8e5de07a300773eb751d33e32fc8 # 2025-10-26
         with:
           blueprint: true
+          api-docs: false
+          build-page: false
